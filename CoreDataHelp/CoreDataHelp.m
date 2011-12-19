@@ -146,4 +146,26 @@ static CoreDataHelp *myCoreDataHelp;
 }
 
 
++ (NSFetchRequest*) fetchRequestWithClass:(Class) c {
+    NSString *className = NSStringFromClass(c);
+    return [NSFetchRequest fetchRequestWithEntityName:className];
+}
+
++ (NSArray*) executeFetchRequest:(NSFetchRequest*) fetchRequest error:(NSError**) e {
+    return [[self moc] executeFetchRequest:fetchRequest error:e];
+}
+
++ (NSArray*) fetchAllObjectsWithClass:(Class) c error:(NSError**) e {
+    NSFetchRequest *request = [self fetchRequestWithClass:c];
+    return [self executeFetchRequest:request error:e];
+}
+
++ (id)getObjectWithClass:(Class)c error:(NSError *__autoreleasing *)e {
+    NSArray *arr = [self fetchAllObjectsWithClass:c error:e];
+    if (arr.count==0) return nil;
+    return [arr objectAtIndex:0];
+}
+
+
+
 @end
