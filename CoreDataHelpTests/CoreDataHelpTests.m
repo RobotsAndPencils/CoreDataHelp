@@ -7,11 +7,13 @@
 //
 
 #import "CoreDataHelpTests.h"
-
+#import "Entity.h"
+#import "CoreDataHelp.h"
 @implementation CoreDataHelpTests
 
 - (void)setUp
 {
+    [CoreDataHelp enable_unit_test_mode];
     [super setUp];
     
     // Set-up code here.
@@ -24,9 +26,11 @@
     [super tearDown];
 }
 
-- (void)testExample
+- (void)testCreateObject
 {
-    STFail(@"Unit tests are not implemented yet in CoreDataHelpTests");
+    Entity *e = [CoreDataHelp createObjectWithClass:[Entity class]];
+    STAssertNotNil(e, @"Failed to create entity!");
+    
 }
 
 @end

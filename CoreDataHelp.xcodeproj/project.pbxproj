@@ -18,6 +18,10 @@
 		3A60A7A2149FDC8B002EC506 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60A789149FDC8B002EC506 /* Foundation.framework */; };
 		3A60A7AA149FDC8B002EC506 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A60A7A8149FDC8B002EC506 /* InfoPlist.strings */; };
 		3A60A7AD149FDC8B002EC506 /* CoreDataHelpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60A7AC149FDC8B002EC506 /* CoreDataHelpTests.m */; };
+		3A60A7B8149FDC97002EC506 /* CoreDataHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60A7B7149FDC97002EC506 /* CoreDataHelp.m */; };
+		3A60A7BB149FDE7C002EC506 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A60A7B9149FDE7C002EC506 /* Model.xcdatamodeld */; };
+		3A60A7BE149FDE93002EC506 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A60A7BD149FDE93002EC506 /* Entity.m */; };
+		3A60A7C0149FDF73002EC506 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A60A7BF149FDF73002EC506 /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,18 +39,24 @@
 		3A60A787149FDC8B002EC506 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3A60A789149FDC8B002EC506 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A60A78B149FDC8B002EC506 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		3A60A78F149FDC8B002EC506 /* CoreDataHelp-Info.plist */ = {isa = PBXFileReference; path = "CoreDataHelp-Info.plist"; sourceTree = "<group>"; };
+		3A60A78F149FDC8B002EC506 /* CoreDataHelp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreDataHelp-Info.plist"; sourceTree = "<group>"; };
 		3A60A791149FDC8B002EC506 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3A60A793149FDC8B002EC506 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3A60A795149FDC8B002EC506 /* CoreDataHelp-Prefix.pch */ = {isa = PBXFileReference; path = "CoreDataHelp-Prefix.pch"; sourceTree = "<group>"; };
-		3A60A796149FDC8B002EC506 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		3A60A795149FDC8B002EC506 /* CoreDataHelp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreDataHelp-Prefix.pch"; sourceTree = "<group>"; };
+		3A60A796149FDC8B002EC506 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A60A797149FDC8B002EC506 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3A60A79E149FDC8B002EC506 /* CoreDataHelpTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreDataHelpTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A60A79F149FDC8B002EC506 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		3A60A7A7149FDC8B002EC506 /* CoreDataHelpTests-Info.plist */ = {isa = PBXFileReference; path = "CoreDataHelpTests-Info.plist"; sourceTree = "<group>"; };
+		3A60A7A7149FDC8B002EC506 /* CoreDataHelpTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreDataHelpTests-Info.plist"; sourceTree = "<group>"; };
 		3A60A7A9149FDC8B002EC506 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		3A60A7AB149FDC8B002EC506 /* CoreDataHelpTests.h */ = {isa = PBXFileReference; path = CoreDataHelpTests.h; sourceTree = "<group>"; };
+		3A60A7AB149FDC8B002EC506 /* CoreDataHelpTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreDataHelpTests.h; sourceTree = "<group>"; };
 		3A60A7AC149FDC8B002EC506 /* CoreDataHelpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelpTests.m; sourceTree = "<group>"; };
+		3A60A7B6149FDC97002EC506 /* CoreDataHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelp.h; sourceTree = "<group>"; };
+		3A60A7B7149FDC97002EC506 /* CoreDataHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelp.m; sourceTree = "<group>"; };
+		3A60A7BA149FDE7C002EC506 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		3A60A7BC149FDE93002EC506 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		3A60A7BD149FDE93002EC506 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		3A60A7BF149FDF73002EC506 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A60A7C0149FDF73002EC506 /* CoreData.framework in Frameworks */,
 				3A60A788149FDC8B002EC506 /* UIKit.framework in Frameworks */,
 				3A60A78A149FDC8B002EC506 /* Foundation.framework in Frameworks */,
 				3A60A78C149FDC8B002EC506 /* CoreGraphics.framework in Frameworks */,
@@ -76,6 +87,7 @@
 		3A60A778149FDC8B002EC506 = {
 			isa = PBXGroup;
 			children = (
+				3A60A7BF149FDF73002EC506 /* CoreData.framework */,
 				3A60A78D149FDC8B002EC506 /* CoreDataHelp */,
 				3A60A7A5149FDC8B002EC506 /* CoreDataHelpTests */,
 				3A60A786149FDC8B002EC506 /* Frameworks */,
@@ -106,6 +118,11 @@
 		3A60A78D149FDC8B002EC506 /* CoreDataHelp */ = {
 			isa = PBXGroup;
 			children = (
+				3A60A7B9149FDE7C002EC506 /* Model.xcdatamodeld */,
+				3A60A7BC149FDE93002EC506 /* Entity.h */,
+				3A60A7BD149FDE93002EC506 /* Entity.m */,
+				3A60A7B6149FDC97002EC506 /* CoreDataHelp.h */,
+				3A60A7B7149FDC97002EC506 /* CoreDataHelp.m */,
 				3A60A796149FDC8B002EC506 /* AppDelegate.h */,
 				3A60A797149FDC8B002EC506 /* AppDelegate.m */,
 				3A60A78E149FDC8B002EC506 /* Supporting Files */,
@@ -250,6 +267,9 @@
 			files = (
 				3A60A794149FDC8B002EC506 /* main.m in Sources */,
 				3A60A798149FDC8B002EC506 /* AppDelegate.m in Sources */,
+				3A60A7B8149FDC97002EC506 /* CoreDataHelp.m in Sources */,
+				3A60A7BB149FDE7C002EC506 /* Model.xcdatamodeld in Sources */,
+				3A60A7BE149FDE93002EC506 /* Entity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +324,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
+					"DCA_DEBUG=1",
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -392,6 +413,56 @@
 			};
 			name = Release;
 		};
+		3A60A7C1149FE0A2002EC506 /* UnitTest */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "DCA_UNITTEST=1";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = UnitTest;
+		};
+		3A60A7C2149FE0A2002EC506 /* UnitTest */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "CoreDataHelp/CoreDataHelp-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = UnitTest;
+		};
+		3A60A7C3149FE0A2002EC506 /* UnitTest */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CoreDataHelp.app/CoreDataHelp";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				INFOPLIST_FILE = "CoreDataHelpTests/CoreDataHelpTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = UnitTest;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -400,6 +471,7 @@
 			buildConfigurations = (
 				3A60A7AE149FDC8B002EC506 /* Debug */,
 				3A60A7AF149FDC8B002EC506 /* Release */,
+				3A60A7C1149FE0A2002EC506 /* UnitTest */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -409,6 +481,7 @@
 			buildConfigurations = (
 				3A60A7B1149FDC8B002EC506 /* Debug */,
 				3A60A7B2149FDC8B002EC506 /* Release */,
+				3A60A7C2149FE0A2002EC506 /* UnitTest */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
@@ -417,10 +490,24 @@
 			buildConfigurations = (
 				3A60A7B4149FDC8B002EC506 /* Debug */,
 				3A60A7B5149FDC8B002EC506 /* Release */,
+				3A60A7C3149FE0A2002EC506 /* UnitTest */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3A60A7B9149FDE7C002EC506 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3A60A7BA149FDE7C002EC506 /* Model.xcdatamodel */,
+			);
+			currentVersion = 3A60A7BA149FDE7C002EC506 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3A60A77A149FDC8B002EC506 /* Project object */;
 }
