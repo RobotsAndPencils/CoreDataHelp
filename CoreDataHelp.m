@@ -166,6 +166,10 @@ static CoreDataHelp *myCoreDataHelp;
     return [arr objectAtIndex:0];
 }
 
++ (void) deleteObject:(NSManagedObject*) o {
+    [[self moc] deleteObject:o];
+}
+
 
 
 @end

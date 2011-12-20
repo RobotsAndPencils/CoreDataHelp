@@ -36,6 +36,7 @@
 //executes a fetch request
 + (NSArray*) executeFetchRequest:(NSFetchRequest*) fetchRequest error:(NSError**) e;
 
++ (void) deleteObject:(NSManagedObject*) o;
 
 
 #if !(defined (DCA_RELEASE)) && !(defined(DCA_DEBUG)) && !defined(DCA_UNITTEST)
