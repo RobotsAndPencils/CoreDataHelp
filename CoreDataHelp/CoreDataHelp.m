@@ -1,6 +1,5 @@
 //
 //  CoreDataHelp.m
-//  SRecovery
 //
 //  Created by Drew Crawford on 7/20/10.
 //  Copyright 2010 DrewCrawfordApps LLC. All rights reserved.
