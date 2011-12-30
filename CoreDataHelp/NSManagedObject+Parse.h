@@ -9,5 +9,5 @@
 #import <CoreData/CoreData.h>
 
 @interface NSManagedObject (Parse)
-+ (void) syncAll;
++ (BOOL) syncAll;
 @end
