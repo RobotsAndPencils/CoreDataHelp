@@ -33,6 +33,13 @@
             [file save];
             val = file;
         }
+        if ([key isEqualToString:@"audio"]) { //for some reason parse doesn't like large NSDatas on load (NSNull dataUsingEncoding failure)
+            if (val==[NSNull null]) break;
+            NSData *audioData = val;
+            PFFile *file = [PFFile fileWithName:@"audio.caf" data:audioData];
+            [file save];
+            val = file;
+        }
         NSLog(@"%@=%@",key,val);
 
         [p setObject:val forKey:key];
@@ -56,7 +63,6 @@
 }
 - (PFObject*) _createNewObject {
     PFObject *newObj = [PFObject objectWithClassName:NSStringFromClass([self class])];
-    [self _setPropertiesOn:newObj];
     return newObj;
 }
 
