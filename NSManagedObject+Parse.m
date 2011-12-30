@@ -30,7 +30,8 @@
         id val = [self valueForKey:key];
         if (!val) val = [NSNull null]; //pfobject doens't like null
         if ([val isKindOfClass:[UIImage class]]) {
-            NSData *imageData = UIImageJPEGRepresentation(val, 0.8);
+            NSData *imageData = UIImageJPEGRepresentation(val, 0.4);
+            NSLog(@"Picture is %d bytes",imageData.length);
             PFFile *file = [PFFile fileWithName:@"key.jpg" data:imageData];
             if (![file save]) return NO;
             val = file;
