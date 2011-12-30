@@ -22,7 +22,9 @@
     if (resultArray.count==0) return nil;
     return [resultArray objectAtIndex:0];
 }
-- (void) _setPropertiesOn:(PFObject*) p {
+
+
+- (BOOL) _setPropertiesOn:(PFObject*) p {
     NSDictionary *myDict =  [[self entity] attributesByName];
     for (id key in [myDict allKeys]) {
         id val = [self valueForKey:key];
@@ -30,14 +32,14 @@
         if ([val isKindOfClass:[UIImage class]]) {
             NSData *imageData = UIImageJPEGRepresentation(val, 0.8);
             PFFile *file = [PFFile fileWithName:@"key.jpg" data:imageData];
-            [file save];
+            if (![file save]) return NO;
             val = file;
         }
         if ([key isEqualToString:@"audio"]) { //for some reason parse doesn't like large NSDatas on load (NSNull dataUsingEncoding failure)
             if (val==[NSNull null]) break;
             NSData *audioData = val;
             PFFile *file = [PFFile fileWithName:@"audio.caf" data:audioData];
-            [file save];
+            if (![file save]) return NO;
             val = file;
         }
         NSLog(@"%@=%@",key,val);
@@ -59,6 +61,7 @@
         [p setObject:valRef forKey:key];
     }
     [p setObject:self.coreDataID forKey:@"coreDataID"];
+    return YES;
 
 }
 - (PFObject*) _createNewObject {
@@ -66,22 +69,25 @@
     return newObj;
 }
 
-- (void) sync {
+- (BOOL) sync {
     [CoreDataHelp write];
     NSLog(@"Syncing %@",self);
     PFObject *serverObj = [self _getServerPFObject];
     if (!serverObj) {
         serverObj = [self _createNewObject];
     }
-    [self _setPropertiesOn:serverObj];
-    [serverObj save];
+    if (![self _setPropertiesOn:serverObj]) return NO;
+    if (![serverObj save]) return NO;
+    return YES;
 }
 
-+ (void) syncAll {
++ (BOOL) syncAll {
+    
     NSArray *objs = [CoreDataHelp fetchAllObjectsWithClass:[self class] error:nil];
     for (id obj in objs) {
-        [obj sync];
+        if (![obj sync]) return NO;
     }
+    return YES;
 }
 
 @end
