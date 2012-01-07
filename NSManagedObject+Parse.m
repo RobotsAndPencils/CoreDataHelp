@@ -62,6 +62,7 @@
         [p setObject:valRef forKey:key];
     }
     [p setObject:self.coreDataID forKey:@"coreDataID"];
+    [p setObject:[PFUser currentUser]?[PFUser currentUser]:[NSNull null] forKey:@"submittedByUser"];
     return YES;
 
 }
