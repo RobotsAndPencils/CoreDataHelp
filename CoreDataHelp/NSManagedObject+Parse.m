@@ -27,25 +27,27 @@
 - (BOOL) _setPropertiesOn:(PFObject*) p {
     NSDictionary *myDict =  [[self entity] attributesByName];
     for (id key in [myDict allKeys]) {
-        id val = [self valueForKey:key];
-        if (!val) val = [NSNull null]; //pfobject doens't like null
-        if ([val isKindOfClass:[UIImage class]]) {
-            NSData *imageData = UIImageJPEGRepresentation(val, 0.4);
-            NSLog(@"Picture is %d bytes",imageData.length);
-            PFFile *file = [PFFile fileWithName:@"key.jpg" data:imageData];
-            if (![file save]) return NO;
-            val = file;
+        @autoreleasepool {
+            id val = [self valueForKey:key];
+            if (!val) val = [NSNull null]; //pfobject doens't like null
+            if ([val isKindOfClass:[UIImage class]]) {
+                NSData *imageData = UIImageJPEGRepresentation(val, 0.4);
+                NSLog(@"Picture is %d bytes",imageData.length);
+                PFFile *file = [PFFile fileWithName:@"key.jpg" data:imageData];
+                if (![file save]) return NO;
+                val = file;
+            }
+            if ([key isEqualToString:@"audio"]) { //for some reason parse doesn't like large NSDatas on load (NSNull dataUsingEncoding failure)
+                if (val==[NSNull null]) break;
+                NSData *audioData = val;
+                PFFile *file = [PFFile fileWithName:@"audio.caf" data:audioData];
+                if (![file save]) return NO;
+                val = file;
+            }
+            NSLog(@"%@=%@",key,val);
+            
+            [p setObject:val forKey:key];
         }
-        if ([key isEqualToString:@"audio"]) { //for some reason parse doesn't like large NSDatas on load (NSNull dataUsingEncoding failure)
-            if (val==[NSNull null]) break;
-            NSData *audioData = val;
-            PFFile *file = [PFFile fileWithName:@"audio.caf" data:audioData];
-            if (![file save]) return NO;
-            val = file;
-        }
-        NSLog(@"%@=%@",key,val);
-
-        [p setObject:val forKey:key];
     }
     myDict = [[self entity] relationshipsByName];
     for (id key in [myDict allKeys]) {
@@ -84,9 +86,17 @@
 
 + (BOOL) syncAll {
     
-    NSArray *objs = [CoreDataHelp fetchAllObjectsWithClass:[self class] error:nil];
+    NSFetchRequest *req = [CoreDataHelp fetchRequestWithClass:[self class]];
+    [req setFetchBatchSize:1]; //large-ass objects
+    [req setReturnsObjectsAsFaults:YES];
+    [req setIncludesPropertyValues:NO];
+    NSArray *objs = [[CoreDataHelp moc] executeFetchRequest:req error:nil];
+    
     for (id obj in objs) {
-        if (![obj sync]) return NO;
+        @autoreleasepool {
+            if (![obj sync]) return NO;
+            [CoreDataHelp fault:obj areYouPositiveThereAreNoChanges:YES];
+        }
     }
     return YES;
 }
