@@ -37,6 +37,8 @@
 
 + (void) deleteObject:(NSManagedObject*) o;
 
++ (void) fault:(NSManagedObject*) o areYouPositiveThereAreNoChanges:(BOOL) nochanges;
+
 
 #if !(defined (DCA_RELEASE)) && !(defined(DCA_DEBUG)) && !defined(DCA_UNITTEST)
 #error You are need to define one or more of the following symbols to compile LogBuddy:  RELEASE, DEBUG, UNITTEST
