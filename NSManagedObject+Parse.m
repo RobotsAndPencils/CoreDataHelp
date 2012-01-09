@@ -9,6 +9,7 @@
 #import "NSManagedObject+Parse.h"
 #import <Parse/Parse.h>
 #import "CoreDataHelp.h"
+#import "Accident.h" //this is a bad idea but w/e
 @implementation NSManagedObject (Parse)
 - (NSString*) coreDataID {
     return [[[self objectID] URIRepresentation] description];
@@ -48,6 +49,7 @@
             
             [p setObject:val forKey:key];
         }
+
     }
     myDict = [[self entity] relationshipsByName];
     for (id key in [myDict allKeys]) {
@@ -65,6 +67,10 @@
     }
     [p setObject:self.coreDataID forKey:@"coreDataID"];
     [p setObject:[PFUser currentUser]?[PFUser currentUser]:[NSNull null] forKey:@"submittedByUser"];
+    
+    Accident *a = [CoreDataHelp getObjectWithClass:[Accident class] error:nil];
+    [p setObject:[a coreDataID] forKey:@"rootAccident"];
+    
     return YES;
 
 }
