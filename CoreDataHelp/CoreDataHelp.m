@@ -158,9 +158,16 @@ static CoreDataHelp *myCoreDataHelp;
     NSFetchRequest *request = [self fetchRequestWithClass:c];
     return [self executeFetchRequest:request error:e];
 }
++ (void) fault:(NSManagedObject*) o areYouPositiveThereAreNoChanges:(BOOL) nochanges {
+    [[self moc] refreshObject:o mergeChanges:!nochanges];
+}
 
 + (id)getObjectWithClass:(Class)c error:(NSError *__autoreleasing *)e {
-    NSArray *arr = [self fetchAllObjectsWithClass:c error:e];
+    NSFetchRequest *singleReq = [self fetchRequestWithClass:c];
+    [singleReq setFetchLimit:1];
+    [singleReq setFetchBatchSize:1];
+    
+    NSArray *arr = [self executeFetchRequest:singleReq error:e];
     if (arr.count==0) return nil;
     return [arr objectAtIndex:0];
 }
