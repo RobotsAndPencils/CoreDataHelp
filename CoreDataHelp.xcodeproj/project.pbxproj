@@ -18,7 +18,6 @@
 		3A213E3C14DA7AB900E2E9B0 /* CoreDataHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A213E3814DA7AB900E2E9B0 /* CoreDataHelp.m */; };
 		3A213E3D14DA7AB900E2E9B0 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A213E3914DA7AB900E2E9B0 /* Entity.h */; };
 		3A213E3E14DA7AB900E2E9B0 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A213E3A14DA7AB900E2E9B0 /* Entity.m */; };
-		3A5326BA14DA8C17000943A3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5326B914DA8C17000943A3 /* CoreData.framework */; };
 		3A5326BC14DA8C68000943A3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5326B914DA8C17000943A3 /* CoreData.framework */; };
 		3A5326C014DA8C93000943A3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A5326BD14DA8C93000943A3 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -59,7 +58,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A5326BA14DA8C17000943A3 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
