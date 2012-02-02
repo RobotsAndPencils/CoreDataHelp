@@ -18,6 +18,9 @@
 		3A213E3C14DA7AB900E2E9B0 /* CoreDataHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A213E3814DA7AB900E2E9B0 /* CoreDataHelp.m */; };
 		3A213E3D14DA7AB900E2E9B0 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A213E3914DA7AB900E2E9B0 /* Entity.h */; };
 		3A213E3E14DA7AB900E2E9B0 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A213E3A14DA7AB900E2E9B0 /* Entity.m */; };
+		3A5326BA14DA8C17000943A3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5326B914DA8C17000943A3 /* CoreData.framework */; };
+		3A5326BC14DA8C68000943A3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5326B914DA8C17000943A3 /* CoreData.framework */; };
+		3A5326C014DA8C93000943A3 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A5326BD14DA8C93000943A3 /* Model.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,8 @@
 		3A213E3814DA7AB900E2E9B0 /* CoreDataHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelp.m; sourceTree = "<group>"; };
 		3A213E3914DA7AB900E2E9B0 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		3A213E3A14DA7AB900E2E9B0 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		3A5326B914DA8C17000943A3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		3A5326BE14DA8C93000943A3 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5326BA14DA8C17000943A3 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A5326BC14DA8C68000943A3 /* CoreData.framework in Frameworks */,
 				3A213E1B14DA7A8B00E2E9B0 /* SenTestingKit.framework in Frameworks */,
 				3A213E1D14DA7A8B00E2E9B0 /* UIKit.framework in Frameworks */,
 				3A213E1F14DA7A8B00E2E9B0 /* Foundation.framework in Frameworks */,
@@ -73,6 +80,7 @@
 		3A213DFC14DA7A8A00E2E9B0 = {
 			isa = PBXGroup;
 			children = (
+				3A5326B914DA8C17000943A3 /* CoreData.framework */,
 				3A213E0C14DA7A8A00E2E9B0 /* CoreDataHelp */,
 				3A213E2314DA7A8B00E2E9B0 /* CoreDataHelpTests */,
 				3A213E1914DA7A8B00E2E9B0 /* Frameworks */,
@@ -107,6 +115,7 @@
 				3A213E0E14DA7A8A00E2E9B0 /* CoreDataHelp-Info.plist */,
 				3A213E0F14DA7A8B00E2E9B0 /* InfoPlist.strings */,
 				3A213E1214DA7A8B00E2E9B0 /* CoreDataHelp-Prefix.pch */,
+				3A5326BD14DA8C93000943A3 /* Model.xcdatamodeld */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -297,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A213E2B14DA7A8B00E2E9B0 /* CoreDataHelpTests.m in Sources */,
+				3A5326C014DA8C93000943A3 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,11 +388,14 @@
 				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
 				DEAD_CODE_STRIPPING = NO;
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_DEBUG;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelp/CoreDataHelp-Info.plist";
 				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
@@ -401,11 +414,14 @@
 				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
 				DEAD_CODE_STRIPPING = NO;
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_RELEASE;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelp/CoreDataHelp-Info.plist";
 				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
@@ -421,12 +437,15 @@
 		3A213E3214DA7A8B00E2E9B0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_DEBUG;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelpTests/CoreDataHelpTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -435,6 +454,7 @@
 					.fake_fw_testing,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -442,12 +462,15 @@
 		3A213E3314DA7A8B00E2E9B0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_RELEASE;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelpTests/CoreDataHelpTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -456,6 +479,7 @@
 					.fake_fw_testing,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
@@ -484,11 +508,14 @@
 				CONTENTS_FOLDER_PATH = "$(WRAPPER_NAME)/Versions/$(FRAMEWORK_VERSION)";
 				DEAD_CODE_STRIPPING = NO;
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_UNITTEST;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelp/CoreDataHelp-Info.plist";
 				INFOPLIST_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Info.plist";
 				INSTALL_PATH = "$(BUILT_PRODUCTS_DIR)";
@@ -504,12 +531,15 @@
 		3A213E4214DA7BC700E2E9B0 /* UnitTest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_UNITTEST;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelpTests/CoreDataHelpTests-Info.plist";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -518,6 +548,7 @@
 					.fake_fw_testing,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = UnitTest;
@@ -556,6 +587,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3A5326BD14DA8C93000943A3 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3A5326BE14DA8C93000943A3 /* Model.xcdatamodel */,
+			);
+			currentVersion = 3A5326BE14DA8C93000943A3 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 3A213DFE14DA7A8A00E2E9B0 /* Project object */;
 }
