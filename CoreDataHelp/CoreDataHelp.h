@@ -39,7 +39,7 @@
 
 
 #if !(defined (DCA_RELEASE)) && !(defined(DCA_DEBUG)) && !defined(DCA_UNITTEST)
-#error You are need to define one or more of the following symbols to compile LogBuddy:  RELEASE, DEBUG, UNITTEST
+#error You are need to define one or more of the following symbols to compile LogBuddy:  DCA_RELEASE, DCA_DEBUG, DCA_UNITTEST
 #endif
 
 
