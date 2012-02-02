@@ -14,7 +14,7 @@
 		3A213E2214DA7A8B00E2E9B0 /* CoreDataHelp.framework in Resources */ = {isa = PBXBuildFile; fileRef = 3A213E0A14DA7A8A00E2E9B0 /* CoreDataHelp.framework */; };
 		3A213E2814DA7A8B00E2E9B0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A213E2614DA7A8B00E2E9B0 /* InfoPlist.strings */; };
 		3A213E2B14DA7A8B00E2E9B0 /* CoreDataHelpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A213E2A14DA7A8B00E2E9B0 /* CoreDataHelpTests.m */; };
-		3A213E3B14DA7AB900E2E9B0 /* CoreDataHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A213E3714DA7AB900E2E9B0 /* CoreDataHelp.h */; };
+		3A213E3B14DA7AB900E2E9B0 /* CoreDataHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A213E3714DA7AB900E2E9B0 /* CoreDataHelp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A213E3C14DA7AB900E2E9B0 /* CoreDataHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A213E3814DA7AB900E2E9B0 /* CoreDataHelp.m */; };
 		3A213E3D14DA7AB900E2E9B0 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A213E3914DA7AB900E2E9B0 /* Entity.h */; };
 		3A213E3E14DA7AB900E2E9B0 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A213E3A14DA7AB900E2E9B0 /* Entity.m */; };
