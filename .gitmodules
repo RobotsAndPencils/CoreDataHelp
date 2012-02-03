@@ -1,0 +1,3 @@
+[submodule "ext/CoreDataHelp"]
+	path = ext/CoreDataHelp
+	url = git@github.com:drewcrawford/CoreDataHelp.git
