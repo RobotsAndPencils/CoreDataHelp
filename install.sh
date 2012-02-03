@@ -3,6 +3,7 @@ GIT_URL=git@github.com:drewcrawford/CoreDataHelp.git
 PROJECT_NAME=CoreDataHelp.xcodeproj
 PACKAGE_NAME=CoreDataHelp
 TARGET_NAME=$PACKAGE_NAME
+STATIC_LIB=lib${PACKAGE_NAME}.a
 PATH_TO_PROJECT=ext/"$PACKAGE_NAME"/"$PROJECT_NAME"
 hash xsplice.rb 2>&- || { echo >&2 "I require xsplice.rb but it's not installed.  Grab it from https://github.com/drewcrawford/xsplice"; exit 1; }
 mkdir ext
@@ -20,9 +21,9 @@ xcodebuild clean
 
 #setup fake framework build settings
 xsplice.rb setsettingarray --xcodeproj="$INSTALL_XCODEPROJ" --target="$INSTALL_TARGET" --setting_name="OTHER_LDFLAGS" --setting_value="-ObjC"
-xsplice.rb setsettingarray --xcodeproj="$INSTALL_XCODEPROJ" --target="$INSTALL_TARGET" --setting_name="OTHER_LDFLAGS" --setting_value="-framework"
-xsplice.rb setsettingarray --xcodeproj="$INSTALL_XCODEPROJ" --target="$INSTALL_TARGET" --setting_name="OTHER_LDFLAGS" --setting_value="$TARGET_NAME"
-
 
 #autoconfig
 xsplice.rb autoconfig --xcodeproj="$INSTALL_XCODEPROJ"
+
+#link
+xsplice.rb linkstaticlib --xcodeproj="$PROJECT_NAME" --staticlib=${STATIC_LIB} --target="$TARGET_NAME"
