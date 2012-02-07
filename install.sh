@@ -4,7 +4,9 @@ PROJECT_NAME=CoreDataHelp.xcodeproj
 PACKAGE_NAME=CoreDataHelp
 TARGET_NAME=$PACKAGE_NAME
 STATIC_LIB=lib${PACKAGE_NAME}.a
-PATH_TO_PROJECT=ext/"$PACKAGE_NAME"/"$PROJECT_NAME"
+PATH_TO_PACKAGE=ext/"$PACKAGE_NAME"/
+PATH_TO_PROJECT=ext/"$PATH_TO_PACKAGE"/"$PROJECT_NAME"
+
 hash xsplice.rb 2>&- || { echo >&2 "I require xsplice.rb but it's not installed.  Grab it from https://github.com/drewcrawford/xsplice"; exit 1; }
 mkdir ext
 git submodule add "$GIT_URL" ext/"$PACKAGE_NAME"
@@ -26,4 +28,11 @@ xsplice.rb setsettingarray --xcodeproj="$INSTALL_XCODEPROJ" --target="$INSTALL_T
 xsplice.rb autoconfig --xcodeproj="$INSTALL_XCODEPROJ"
 
 #link
-xsplice.rb linkstaticlib --xcodeproj="$PROJECT_NAME" --staticlib=${STATIC_LIB} --target="$TARGET_NAME"
+#xsplice.rb linkstaticlib --xcodeproj="$PROJECT_NAME" --staticlib=${STATIC_LIB} --target="$TARGET_NAME"
+
+#copy headers
+mkdir ext/Headers
+HEADER_DIR=ext/Headers/CoreDataHelp
+mkdir $HEADER_DIR
+cp "$PATH_TO_PACKAGE"/CoreDataHelp/CoreDataHelp.h $HEADER_DIR/
+
