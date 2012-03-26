@@ -3,13 +3,56 @@
 //
 //  Created by Drew Crawford on 7/20/10.
 //  Copyright 2010 DrewCrawfordApps LLC. All rights reserved.
-//  May have been transferred or licensed to another party under the
-//  terms of a copyright release, if applicable.////
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
+//import all the things
+#import <CoreDataHelp/NSManagedObject+DCAAdditions.h>
+#import <CoreDataHelp/DCACacheFirstIncrementalStore.h>
+#import <CoreDataHelp/DCAFetchRequest.h>
+#import <CoreDataHelp/CoreDataStack.h>
+#import <CoreDataHelp/CoreDataHelpError.h>
+#import <CoreDataHelp/DCACacheable.h>
 
+void objc_retain(id x);
+#define WORK_AROUND_RDAR_10732696(X) objc_retain(X)
+/*
+                              _,.-'                   `-._
+                         _,."                            -.
+                     .-""   ___...---------.._             `.
+                     `---'""                  `-.            `.
+                                                 `.            \
+                                                   `.           \
+                                                     \           \
+                                                      .           \
+                                                      |            .
+                                                      |            |
+                                _________             |            |
+                          _,.-'"         `"'-.._      :            |
+                      _,-'                      `-._.'             |
+                   _.'                              `.             '
+        _.-.    _,+......__                           `.          .
+      .'    `-"'           `"-.,-""--._                 \        /
+     /    ,'                  |    __  \                 \      /
+    `   ..                       +"  )  \                 \    /
+     `.'  \          ,-"`-..    |       |                  \  /
+      / " |        .'       \   '.    _.'                   .'
+     |,.."--"""--..|    "    |    `""`.                     |
+   ,"               `-._     |        |                     |
+ .'                     `-._+         |                     |
+/                           `.                        /     |
+|    `     '                  |                      /      |
+`-.....--.__                  |              |      /       |
+   `./ "| / `-.........--.-   '              |    ,'        '
+     /| ||        `.'  ,'   .'               |_,-+         /
+    / ' '.`.        _,'   ,'     `.          |   '   _,.. /
+   /   `.  `"'"'""'"   _,^--------"`.        |    `.'_  _/
+  /... _.`:.________,.'              `._,.-..|        "'
+ `.__.'                                 `._  /
+                                           "' mh
+ 
+ THIS CLASS IS DEPRECATED!! */
 @interface CoreDataHelp : NSObject {
 	NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;

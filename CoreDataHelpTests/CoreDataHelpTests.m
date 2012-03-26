@@ -26,11 +26,5 @@
     [super tearDown];
 }
 
-- (void)testCreateObject
-{
-    Entity *e = [CoreDataHelp createObjectWithClass:[Entity class]];
-    STAssertNotNil(e, @"Failed to create entity!");
-    
-}
 
 @end
