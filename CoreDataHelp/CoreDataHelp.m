@@ -74,7 +74,7 @@ static CoreDataHelp *myCoreDataHelp;
 
 - (id)init {
     if (self = [super init]) {
-        NSLog(@"                                  _.---\"'\"\"\"\"\"'`--.._\n"
+        NSLog(@"\n                                  _.---\"'\"\"\"\"\"'`--.._\n"
 "                             _,.-'                   `-._\n"
 "                         _,.\"                            -.\n"
 "                     .-\"\"   ___...---------.._             `.\n"
