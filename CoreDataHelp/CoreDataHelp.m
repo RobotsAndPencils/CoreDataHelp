@@ -9,6 +9,7 @@
 #import "CoreDataHelp.h"
 @interface CoreDataHelp() {
     BOOL unit_test_mode;
+    NSPersistentStore *persistentStore;
 }
 
 
@@ -69,6 +70,71 @@ static CoreDataHelp *myCoreDataHelp;
         managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil] ;  
     }
     return managedObjectModel;
+}
+
+- (id)init {
+    if (self = [super init]) {
+        NSLog(@"                                  _.---\"'\"\"\"\"\"'`--.._\n"
+"                             _,.-'                   `-._\n"
+"                         _,.\"                            -.\n"
+"                     .-\"\"   ___...---------.._             `.\n"
+"                     `---'\"\"                  `-.            `.\n"
+"                                                 `.            \\\n"
+"                                                   `.           \\\n"
+"                                                     \\           \\\n"
+"                                                      .           \\\n"
+"                                                      |            .\n"
+"                                                      |            |\n"
+"                                _________             |            |\n"
+"                          _,.-'\"         `\"'-.._      :            |\n"
+"                      _,-'                      `-._.'             |\n"
+"                   _.'                              `.             '\n"
+"        _.-.    _,+......__                           `.          .\n"
+"      .'    `-\"'           `\"-.,-\"\"--._                 \\        /\n"
+"     /    ,'                  |    __  \\                 \\      /\n"
+"    `   ..                       +\"  )  \\                 \\    /\n"
+"     `.'  \\          ,-\"`-..    |       |                  \\  /\n"
+"      / \" |        .'       \\   '.    _.'                   .'\n"
+"     |,..\"--\"\"\"--..|    \"    |    `\"\"`.                     |\n"
+"   ,\"               `-._     |        |                     |\n"
+" .'                     `-._+         |                     |\n"
+"/                           `.                        /     |\n"
+"|    `     '                  |                      /      |\n"
+"`-.....--.__                  |              |      /       |\n"
+"   `./ \"| / `-.........--.-   '              |    ,'        '\n"
+"     /| ||        `.'  ,'   .'               |_,-+         /\n"
+"    / ' '.`.        _,'   ,'     `.          |   '   _,.. /\n"
+"   /   `.  `\"'\"'\"\"'\"   _,^--------\"`.        |    `.'_  _/\n"
+"  /... _.`:.________,.'              `._,.-..|        \"'\n"
+" `.__.'                                 `._  /\n"
+"                                           \"' mh\n"
+              "Slowpoke says:  CoreDataHelp class is deprecated!  Use CoreDataStack instead!  Waiting for slowpoke...");
+        
+              sleep(10);
+              
+    }
+    return self;
+}
+
+-(void) installIncrementalStore:(Class) incrementalStoreClass {
+    NSAssert(!managedObjectContext,@"A managed object context already exists.");
+    NSAssert(!persistentStoreCoordinator,@"A persistent store coordinator already exists.");
+    NSAssert(!persistentStore,@"A persistent store already exists.");
+    
+    NSString *storeType = [incrementalStoreClass performSelector:@selector(storeType)];
+    [NSPersistentStoreCoordinator registerStoreClass:incrementalStoreClass forStoreType:storeType];
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSError *err = nil;
+    persistentStore = [persistentStoreCoordinator addPersistentStoreWithType:storeType configuration:nil URL:nil options:nil error:&err];
+    if (!persistentStore) {
+        NSLog(@"err: %@",err);
+        abort();
+    }
+    
+    
+}
++ (void)installIncrementalStore:(Class)incrementalStoreClass {
+    [[CoreDataHelp shared] installIncrementalStore:incrementalStoreClass];
 }
 
 /**
