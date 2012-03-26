@@ -40,6 +40,8 @@
 		3A803D821520057B007D0B62 /* NSManagedObject+DCAAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D801520057B007D0B62 /* NSManagedObject+DCAAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D831520057B007D0B62 /* NSManagedObject+DCAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A803D811520057B007D0B62 /* NSManagedObject+DCAAdditions.m */; };
 		3A803D8415201D0E007D0B62 /* DCACacheFirstIncrementalStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D50151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE38A4EF1521340A005AE1E8 /* CoreDataStack+Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		3A803D7D152004F1007D0B62 /* DCAFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAFetchRequest.m; sourceTree = "<group>"; };
 		3A803D801520057B007D0B62 /* NSManagedObject+DCAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+DCAAdditions.h"; sourceTree = "<group>"; };
 		3A803D811520057B007D0B62 /* NSManagedObject+DCAAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+DCAAdditions.m"; sourceTree = "<group>"; };
+		BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreDataStack+Singleton.h"; sourceTree = "<group>"; };
+		BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CoreDataStack+Singleton.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +175,8 @@
 				3A35F66715202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m */,
 				3A0545261520464B00FE961D /* DCAFetchRequestModel.h */,
 				3A0545271520464B00FE961D /* DCAFetchRequestModel.m */,
+				BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */,
+				BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */,
 			);
 			path = CoreDataHelp;
 			sourceTree = "<group>";
@@ -225,6 +231,7 @@
 				3A35F66315201FC8004AEBA8 /* CoreDataHelpError.h in Headers */,
 				3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */,
 				3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */,
+				BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +342,7 @@
 				3A35F66415201FC8004AEBA8 /* CoreDataHelpError.m in Sources */,
 				3A35F66915202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m in Sources */,
 				3A0545291520464B00FE961D /* DCAFetchRequestModel.m in Sources */,
+				BE38A4EF1521340A005AE1E8 /* CoreDataStack+Singleton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +390,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "$(PRODUCT_NAME)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -441,6 +450,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "$(PRODUCT_NAME)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -459,6 +469,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INSTALL_PATH = "$(PRODUCT_NAME)";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
