@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <CoreDataHelp/DCAFetchRequest.h>
+
 @interface CoreDataStack : NSObject
 + (CoreDataStack*) inMemoryStack;
++ (CoreDataStack*) onDiskStack;
 + (CoreDataStack*) incrementalStoreStack:(Class) autoInstallableIncrementalStore;
 
 - (id) executeFetchRequest:(NSFetchRequest*) fetchRequest err:(NSError * __autoreleasing *) err;
