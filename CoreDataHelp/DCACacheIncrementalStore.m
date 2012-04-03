@@ -70,6 +70,7 @@
     NSFetchRequest *fRequest = [dataSource portFetchRequest:(DCAFetchRequest*) request];
     id result = [dataSource executeFetchRequest:(NSFetchRequest*) fRequest err:error];
     NSFetchRequest *inceptionRequest = [DCAFetchRequest fetchRequestWithEntityClass:[DCAFetchRequestModel class]];
+    inceptionRequest.predicate = [NSPredicate predicateWithFormat:@"fetchRequest == %@",fRequest];
     NSArray *previousRequest = [dataSource executeFetchRequest:inceptionRequest err:error];
     if (!previousRequest) {
         WORK_AROUND_RDAR_10732696(*error);
