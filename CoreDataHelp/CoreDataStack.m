@@ -39,6 +39,9 @@
 }
 
 + (CoreDataStack*) onDiskStack {
+#ifdef DCA_UNITTEST 
+    return [CoreDataStack inMemoryStack];
+#endif
     CoreDataStack *stack = [[CoreDataStack alloc] init];
     stack->managedObjectModel = [NSManagedObjectModel defaultModel];
     if (stack->managedObjectModel.entities.count==0) {
