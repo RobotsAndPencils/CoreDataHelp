@@ -78,7 +78,8 @@
     NSDate *arbitraryDate = nil;
     if (previousRequest.count==0) arbitraryDate = [NSDate distantPast];
     else arbitraryDate = [NSDate date]; 
-#warning that wasn't right at all
+
+#warning that wasn't right at all //___INTELLIGENCE_DAMPENING_CORE_WHEATLEY
     if ([DCACachingPolicy defaultCachingPolicy].cachingPolicy(arbitraryDate)) return result;
     else {
         *error = [CoreDataHelpError errorWithCode:CDHErrorCacheTooOld format:@"Cache is too old"];
