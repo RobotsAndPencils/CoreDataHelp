@@ -280,7 +280,7 @@
 		3A34EC0F14DC975000C7CAC6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 3A34EC1214DC975000C7CAC6 /* Build configuration list for PBXProject "CoreDataHelp" */;
 			compatibilityVersion = "Xcode 3.2";
