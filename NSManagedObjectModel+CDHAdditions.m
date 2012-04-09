@@ -9,13 +9,10 @@
 #import "NSManagedObjectModel+CDHAdditions.h"
 #import "DCAFetchRequestModel.h"
 #import "NSManagedObject+DCAAdditions.h"
+#import "CoreDataHelp.h"
 @implementation NSManagedObjectModel (CDHAdditions)
 + (NSManagedObjectModel *)defaultModel {
-#ifdef DCA_UNITTEST
-    return [NSManagedObjectModel mergedModelFromBundles:[NSArray arrayWithObject:[NSBundle bundleForClass:[CoreDataHelp class]]]];
-#else
     return [NSManagedObjectModel mergedModelFromBundles:nil];
-#endif
 }
 
 + (NSManagedObjectModel *)cachingModel {
