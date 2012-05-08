@@ -19,6 +19,10 @@
 - (id) insertNewObjectOfClass:(Class) c;
 - (BOOL) save:(NSError *__autoreleasing*) error;
 
+//threading functions
+- (void) backgroundOperation:(void (^)()) block;
+- (id) objectOnCurrentThread:(NSManagedObject*) o;
+
 //internal use only!!!!!
 - (NSPersistentStore*) persistentStore;
 + (CoreDataStack*) cachingStack;

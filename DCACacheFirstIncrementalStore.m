@@ -43,6 +43,7 @@
 -(id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
     NSAssert(error,@"Must pass in an error.");
     NSAssert([request isKindOfClass:[NSFetchRequest class]],@"Only fetch requests currently supported.");
+    NSFetchRequest *fRequest = (NSFetchRequest*) request;
     id result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
     if (result) return result;
     
@@ -59,9 +60,23 @@
     result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
     if (result) {
         *error = nil; //clear out any previous error, such as Cache too old
-        return result;
+        NSMutableArray *resultArr = [[NSMutableArray alloc] init];
+        for(NSManagedObject<DCACacheable> *o in result) {
+            [resultArr addObject:[context objectWithID:[self newObjectIDForEntity:fRequest.entity referenceObject:o]]];
+        }
+        return resultArr;
     }
     return nil;
+}
+
+- (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
+    NSManagedObject *cachedObj = [self referenceObjectForObjectID:objectID];
+    NSMutableDictionary *cachedValues = [[NSMutableDictionary alloc] init];
+    for (NSString *keyName in cachedObj.entity.attributesByName.allKeys) {
+        if ([cachedObj valueForKey:keyName]) [cachedValues setObject:[cachedObj valueForKey:keyName] forKey:keyName];
+    }
+    return [[NSIncrementalStoreNode alloc] initWithObjectID:objectID withValues:cachedValues version:1];
+    
 }
 
 + (NSPersistentStore *)installInCoordinator:(NSPersistentStoreCoordinator *)coordinator {

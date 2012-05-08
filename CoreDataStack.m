@@ -16,6 +16,7 @@
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
+    NSManagedObjectContext *privateManagedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     
 }
@@ -111,6 +112,40 @@
     return stack;
 }
 
+- (NSManagedObjectContext*) poc {
+    if (!privateManagedObjectContext) {
+        privateManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:(NSPrivateQueueConcurrencyType)];
+        privateManagedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
+    }
+    return privateManagedObjectContext;
+}
+
+- (NSManagedObjectContext*) currentMoc {
+    if (dispatch_get_current_queue()==dispatch_get_main_queue()) return managedObjectContext;
+    else return privateManagedObjectContext;
+}
+
+- (void) backgroundOperation:(void (^)()) block {
+    [[self poc] performBlock:block];
+}
+
+- (id)objectOnCurrentThread:(NSManagedObject *)obj {
+    NSManagedObjectContext *correctContext = [self currentMoc];
+    if (obj.managedObjectContext ==correctContext) return obj;
+    NSAssert(!obj.isInserted,@"(Not supported because Drew is lazy, file a bug, read the CD concurrency guide.)  The fix is trivial: just view the problem as a context-free poset whose elements are nonsingular bijections.");
+    NSAssert(!obj.isUpdated,@"(Potentially dangerous operation, escalate to Drew to discuss, read the CD concurrency guide).  The fix is trivial: Just view the problem as a dihedral group whose relements are rgular residue classes.");
+    NSAssert(!obj.isDeleted,@"(Potentially dangerous operation, escalate to Drew to discuss, read the CD concurrency guide.).  The fix is trivial: Just biject it to a continuous complexity class whose elements are structure-preserving semigroups.");
+    NSManagedObjectID *oid = [obj objectID];
+    NSError *err = nil;
+    NSManagedObject *result = [correctContext existingObjectWithID:oid error:&err];
+    if (!result) {
+        NSLog(@"Error while moving an object between threads: %@",err);
+        abort();
+    }
+    return result;
+    
+}
+
 - (id)insertNewObjectOfClass:(Class)c {
     return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(c) inManagedObjectContext:managedObjectContext];
 }
@@ -121,10 +156,11 @@
 - (id)executeFetchRequest:(id)fetchRequest err:(NSError *__autoreleasing *)err {
     NSAssert(err,@"Did not pass in an error object.");
     NSAssert(managedObjectContext,@"No moc?");
-    return [managedObjectContext executeFetchRequest:fetchRequest error:err];
+    return [[self currentMoc] executeFetchRequest:fetchRequest error:err];
 
 }
 - (BOOL) save:(NSError *__autoreleasing*) error {
+    [[self poc] save:error];
     return [managedObjectContext save:error];
 }
 
@@ -138,5 +174,7 @@
     //todo: filters, sorts
     return retFetchRequest;
 }
+
+
 
 @end
