@@ -25,6 +25,8 @@
 		3A35F66415201FC8004AEBA8 /* CoreDataHelpError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35F66215201FC8004AEBA8 /* CoreDataHelpError.m */; };
 		3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66615202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h */; };
 		3A35F66915202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35F66715202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m */; };
+		3A5C681B1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A5C68191559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h */; };
+		3A5C681C1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C681A1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m */; };
 		3A803D53151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A803D51151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.m */; };
 		3A803D5D151FD36F007D0B62 /* DCACacheable.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D5C151FD36F007D0B62 /* DCACacheable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D65151FD71F007D0B62 /* CoreDataHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34EC2014DC975000C7CAC6 /* CoreDataHelp.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -77,6 +79,8 @@
 		3A35F66215201FC8004AEBA8 /* CoreDataHelpError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelpError.m; sourceTree = "<group>"; };
 		3A35F66615202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+CDHAdditions.h"; sourceTree = "<group>"; };
 		3A35F66715202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+CDHAdditions.m"; sourceTree = "<group>"; };
+		3A5C68191559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIncrementalStore+CDHAdditions.h"; sourceTree = "<group>"; };
+		3A5C681A1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIncrementalStore+CDHAdditions.m"; sourceTree = "<group>"; };
 		3A803D50151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCACacheFirstIncrementalStore.h; sourceTree = "<group>"; };
 		3A803D51151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCACacheFirstIncrementalStore.m; sourceTree = "<group>"; };
 		3A803D5C151FD36F007D0B62 /* DCACacheable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCACacheable.h; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 				3A0545271520464B00FE961D /* DCAFetchRequestModel.m */,
 				BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */,
 				BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */,
+				3A5C68191559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h */,
+				3A5C681A1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m */,
 			);
 			path = CoreDataHelp;
 			sourceTree = "<group>";
@@ -232,6 +238,7 @@
 				3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */,
 				3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */,
 				BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */,
+				3A5C681B1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +350,7 @@
 				3A35F66915202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m in Sources */,
 				3A0545291520464B00FE961D /* DCAFetchRequestModel.m in Sources */,
 				BE38A4EF1521340A005AE1E8 /* CoreDataStack+Singleton.m in Sources */,
+				3A5C681C1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

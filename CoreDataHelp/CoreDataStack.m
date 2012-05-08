@@ -140,6 +140,9 @@
     NSManagedObject *result = [correctContext existingObjectWithID:oid error:&err];
     if (!result) {
         NSLog(@"Error while moving an object between threads: %@",err);
+        NSLog(@"Object is %@",obj);
+        NSLog(@"Object comes from context %@ with pc %@",obj.managedObjectContext,obj.managedObjectContext.persistentStoreCoordinator);
+        NSLog(@"Attemping to move to context %@ with pc %@",correctContext,correctContext.persistentStoreCoordinator);
         abort();
     }
     return result;
@@ -156,7 +159,12 @@
 - (id)executeFetchRequest:(id)fetchRequest err:(NSError *__autoreleasing *)err {
     NSAssert(err,@"Did not pass in an error object.");
     NSAssert(managedObjectContext,@"No moc?");
-    return [[self currentMoc] executeFetchRequest:fetchRequest error:err];
+    NSArray *results =  [[self currentMoc] executeFetchRequest:fetchRequest error:err];
+    for (NSManagedObject *result in results) {
+        NSAssert(result.managedObjectContext==[self currentMoc],@"Bad object returned while executing request %@, this will cause future errors",fetchRequest);
+        
+    }
+    return results;
 
 }
 - (BOOL) save:(NSError *__autoreleasing*) error {
