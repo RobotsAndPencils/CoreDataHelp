@@ -10,6 +10,7 @@
 #import "DCACacheIncrementalStore.h"
 #import "CoreDataStack.h"
 #import "CoreDataHelp.h"
+#import "NSIncrementalStore+CDHAdditions.h"
 @implementation DCACacheFirstIncrementalStore {
 
     
@@ -45,7 +46,7 @@
     NSAssert([request isKindOfClass:[NSFetchRequest class]],@"Only fetch requests currently supported.");
     NSFetchRequest *fRequest = (NSFetchRequest*) request;
     id result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
-    if (result) return result;
+    if (result) return [self portForeignObjects:result toContext:context];
     
     result = [self dcaExecuteRequest:request withContext:context error:error];
     if (![result isEqual:cacheIsCorrectNow]) {
@@ -60,22 +61,14 @@
     result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
     if (result) {
         *error = nil; //clear out any previous error, such as Cache too old
-        NSMutableArray *resultArr = [[NSMutableArray alloc] init];
-        for(NSManagedObject<DCACacheable> *o in result) {
-            [resultArr addObject:[context objectWithID:[self newObjectIDForEntity:fRequest.entity referenceObject:o]]];
-        }
-        return resultArr;
+        
+        return [self portForeignObjects:result toContext:context];
     }
     return nil;
 }
 
 - (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
-    NSManagedObject *cachedObj = [self referenceObjectForObjectID:objectID];
-    NSMutableDictionary *cachedValues = [[NSMutableDictionary alloc] init];
-    for (NSString *keyName in cachedObj.entity.attributesByName.allKeys) {
-        if ([cachedObj valueForKey:keyName]) [cachedValues setObject:[cachedObj valueForKey:keyName] forKey:keyName];
-    }
-    return [[NSIncrementalStoreNode alloc] initWithObjectID:objectID withValues:cachedValues version:1];
+    return [self inceptionNodeForObjectID:objectID];
     
 }
 

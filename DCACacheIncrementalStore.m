@@ -14,6 +14,7 @@
 #import "DCAFetchRequestModel.h"
 #import "NSManagedObject+DCAAdditions.h"
 #import "DCACacheable.h"
+#import "NSIncrementalStore+CDHAdditions.h"
 @implementation DCACacheIncrementalStore {
     CoreDataStack *dataSource;
 }
@@ -81,7 +82,7 @@
     else arbitraryDate = [NSDate date]; 
 
 #warning that wasn't right at all //___INTELLIGENCE_DAMPENING_CORE_WHEATLEY
-    if ([DCACachingPolicy defaultCachingPolicy].cachingPolicy(arbitraryDate)) return result;
+    if ([DCACachingPolicy defaultCachingPolicy].cachingPolicy(arbitraryDate)) return [self portForeignObjects:result toContext:context];
     else {
         *error = [CoreDataHelpError errorWithCode:CDHErrorCacheTooOld format:@"Cache is too old"];
         WORK_AROUND_RDAR_10732696(*error);
@@ -97,6 +98,10 @@
         
     }
     return idArray;
+}
+
+- (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
+    return [self inceptionNodeForObjectID:objectID];
 }
 - (void)queryServed:(DCAFetchRequest *)fetchRequest {
     DCAFetchRequestModel *model = [dataSource insertNewObjectOfClass:[DCAFetchRequestModel class]];
