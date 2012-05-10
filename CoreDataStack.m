@@ -179,7 +179,8 @@
 
 - (DCAFetchRequest*)portFetchRequest:(DCAFetchRequest*)fetchRequest {
     DCAFetchRequest *retFetchRequest = [[DCAFetchRequest alloc] initWithEntityName:fetchRequest.entityName];
-    //todo: filters, sorts
+    retFetchRequest.sortDescriptors = fetchRequest.sortDescriptors;
+    //todo: filters
     return retFetchRequest;
 }
 
