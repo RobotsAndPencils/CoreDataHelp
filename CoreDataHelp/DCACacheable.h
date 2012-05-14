@@ -15,6 +15,8 @@
  Data key that may be unique only to a particular store. */
 @property (readonly) NSString *uniqueID;
 
+@property (readonly) NSString *uniqueIDKeyPath;
+
 /**This is a datestamp that indicates when the object was created, modified, or known to be valid. */
 //@property (strong,nonatomic) NSDate *modifiedTime;
  

@@ -7,7 +7,9 @@
 //
 
 #import <CoreData/CoreData.h>
-
+#import <CoreDataHelp/DCACachingPolicy.h>
 @interface DCAFetchRequest : NSFetchRequest
 + (DCAFetchRequest*) fetchRequestWithEntityClass:(Class) entityClass;
+@property (retain) DCACachingPolicy *cachingPolicy;
+
 @end

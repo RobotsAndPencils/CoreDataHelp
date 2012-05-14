@@ -14,6 +14,7 @@
 typedef BOOL(^isResultAcceptable)(NSDate *arbitraryDate);
 
 +(DCACachingPolicy*) defaultCachingPolicy;
++(DCACachingPolicy*) cachingPolicyWithBlock:(isResultAcceptable) block;
 
 
 @property (copy) isResultAcceptable cachingPolicy;
