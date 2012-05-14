@@ -13,6 +13,7 @@
 #import "DCACacheIncrementalStore.h"
 #import "DCAFetchRequestModel.h"
 #import "NSManagedObject+DCAAdditions.h"
+#import "DCACacheable.h"
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
@@ -152,8 +153,26 @@
 - (id)insertNewObjectOfClass:(Class)c {
     return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(c) inManagedObjectContext:managedObjectContext];
 }
+- (void) delete:(NSManagedObject*)obj {
+    [managedObjectContext deleteObject:obj];
+}
 - (NSPersistentStore *)persistentStore {
     return [persistentStoreCoordinator.persistentStores objectAtIndex:0];
+}
+
+- (NSArray*) objectsMatchingCacheable:(NSManagedObject<DCACacheable>*) cacheable {
+    DCAFetchRequest *fetchRequest = [DCAFetchRequest fetchRequestWithEntityClass:[cacheable class]];
+    NSString *format = [NSString stringWithFormat:@"%@ == %%@",cacheable.uniqueIDKeyPath];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:format,cacheable.uniqueID];
+    fetchRequest.cachingPolicy = [DCACachingPolicy cachingPolicyWithBlock:^BOOL(NSDate *arbitraryDate) {
+        return YES;
+    }];
+    NSError *err = nil;
+    NSArray *arr = [self executeFetchRequest:fetchRequest err:&err];
+    if (!arr) {
+        NSLog(@"error: %@",err);
+    }
+    return arr;
 }
 
 - (id)executeFetchRequest:(id)fetchRequest err:(NSError *__autoreleasing *)err {
@@ -180,7 +199,15 @@
 - (DCAFetchRequest*)portFetchRequest:(DCAFetchRequest*)fetchRequest {
     DCAFetchRequest *retFetchRequest = [[DCAFetchRequest alloc] initWithEntityName:fetchRequest.entityName];
     retFetchRequest.sortDescriptors = fetchRequest.sortDescriptors;
-    //todo: filters
+    if (fetchRequest.predicate) {
+        NSAssert([fetchRequest.predicate class]==[NSComparisonPredicate class],@"Non-comparison predicate");
+        NSComparisonPredicate *comparisonPredicate = (NSComparisonPredicate*) fetchRequest.predicate;
+        NSAssert(comparisonPredicate.leftExpression.keyPath,@"This fetch request might port incorrectly; file a bug.");
+        NSAssert(comparisonPredicate.rightExpression.constantValue,@"This fetch request might port incorrectly; file a bug.");
+        NSAssert(![comparisonPredicate.rightExpression.constantValue isKindOfClass:[NSManagedObject class]],@"This fetch request might not port correctly; file a bug.");
+        retFetchRequest.predicate = fetchRequest.predicate;
+    }
+    retFetchRequest.cachingPolicy = fetchRequest.cachingPolicy;
     return retFetchRequest;
 }
 

@@ -19,4 +19,9 @@
     };
     return policy;
 }
++(DCACachingPolicy*) cachingPolicyWithBlock:(isResultAcceptable) block {
+    DCACachingPolicy *policy = [[DCACachingPolicy alloc] init];
+    policy.cachingPolicy = block;
+    return policy;
+}
 @end

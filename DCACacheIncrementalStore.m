@@ -63,6 +63,10 @@
     if (![dataSource save:error]) return nil;
     return [NSArray array];
 }
+- (DCACachingPolicy*) effectivePolicy:(DCAFetchRequest*) any {
+    if (any.cachingPolicy) return any.cachingPolicy;
+    return [DCACachingPolicy defaultCachingPolicy];
+}
 - (id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
     NSAssert(error,@"An error value is required.");
     if ([request isKindOfClass:[NSSaveChangesRequest class]]) {
@@ -82,7 +86,7 @@
     else arbitraryDate = [NSDate date]; 
 
 #warning that wasn't right at all //___INTELLIGENCE_DAMPENING_CORE_WHEATLEY
-    if ([DCACachingPolicy defaultCachingPolicy].cachingPolicy(arbitraryDate)) return [self portForeignObjects:result toContext:context];
+    if ([self effectivePolicy:fRequest].cachingPolicy(arbitraryDate)) return [self portForeignObjects:result toContext:context];
     else {
         *error = [CoreDataHelpError errorWithCode:CDHErrorCacheTooOld format:@"Cache is too old"];
         WORK_AROUND_RDAR_10732696(*error);
