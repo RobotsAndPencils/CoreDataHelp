@@ -30,7 +30,8 @@
     }
     stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
     NSError *err = nil;
-    [stack->persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&err];
+    NSPersistentStore *store = [stack->persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&err];
+    NSAssert(store,@"No store seems to have been created, reason: %@",err);
     stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [stack->managedObjectContext setPersistentStoreCoordinator:stack->persistentStoreCoordinator];
     if (!stack->persistentStoreCoordinator) {
@@ -53,7 +54,8 @@
     NSError *err = nil;
     NSString *bundle_id = [[NSBundle mainBundle]objectForInfoDictionaryKey:@"CFBundleIdentifier"];
     NSURL *storeUrl = [NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:bundle_id]];
-    [stack->persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&err];
+    NSPersistentStore *store = [stack->persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&err];
+    NSAssert(store,@"No store seems to have been created, reason: %@",err);
     stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [stack->managedObjectContext setPersistentStoreCoordinator:stack->persistentStoreCoordinator];
     if (!stack->persistentStoreCoordinator) {
@@ -107,7 +109,9 @@
     
     stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
     NSError *err = nil;
-    [stack->persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&err];
+    NSPersistentStore *store = [stack->persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&err];
+    NSAssert(store,@"No store seems to have been created, reason: %@",err);
+
     stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     [stack->managedObjectContext setPersistentStoreCoordinator:stack->persistentStoreCoordinator];
     if (!stack->persistentStoreCoordinator) {
