@@ -35,7 +35,7 @@ static const NSString *cacheIsCorrectNow = @"CacheIsCorrectNow";
 
 -(id)dcaExecuteRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error;
 
-
+- (NSArray*) objectsMatchingCacheable:(NSManagedObject<DCACacheable>*) cacheable;
 
 
 @end

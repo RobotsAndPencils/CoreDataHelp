@@ -51,12 +51,14 @@
 - (id) executeSaveRequest:(NSSaveChangesRequest*) request withContext:(NSManagedObjectContext*) context error:(NSError *__autoreleasing *) error {
     NSAssert(request.deletedObjects.count==0,@"Delete not supported.");
     NSAssert(request.updatedObjects.count==0,@"Updated objects not supported.");
-    for(NSManagedObject *object in request.insertedObjects) {
+    for(NSManagedObject<DCACacheable> *object in request.insertedObjects) {
         NSManagedObject *cachedObj = [dataSource insertNewObjectOfClass:[object class]];
         //loop over properties
-        for(NSString *attributeKey in cachedObj.entity.attributesByName.allKeys) {
+        for(NSString *attributeKey in object.entity.attributesByName.allKeys) {
             [cachedObj setValue:[object valueForKey:attributeKey] forKey:attributeKey];
         }
+        
+        [cachedObj setValue:[object uniqueID] forKey:INTERNAL_CACHING_KEY];
         NSAssert(cachedObj.entity.relationshipsByName.count==0,@"Relationship caching not currently supported.");
         
     }
@@ -102,6 +104,21 @@
         
     }
     return idArray;
+}
+
+- (NSArray*) objectsMatchingCacheable:(NSManagedObject<DCACacheable>*) cacheable {
+    DCAFetchRequest *fetchRequest = [DCAFetchRequest fetchRequestWithEntityClass:[cacheable class]];
+    NSString *format = [NSString stringWithFormat:@"%@ == %%@",INTERNAL_CACHING_KEY];
+    fetchRequest.predicate = [NSPredicate predicateWithFormat:format,cacheable.uniqueID];
+    fetchRequest.cachingPolicy = [DCACachingPolicy cachingPolicyWithBlock:^BOOL(NSDate *arbitraryDate) {
+        return YES;
+    }];
+    NSError *err = nil;
+    NSArray *arr = [dataSource executeFetchRequest:fetchRequest err:&err];
+    if (!arr) {
+        NSLog(@"error: %@",err);
+    }
+    return arr;
 }
 
 - (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {

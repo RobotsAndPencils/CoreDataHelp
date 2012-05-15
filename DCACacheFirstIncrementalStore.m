@@ -86,4 +86,8 @@
     NSLog(@"Not implemented in this abstract class.");
     abort();
 }
+
+- (NSArray *)objectsMatchingCacheable:(NSManagedObject<DCACacheable> *)cacheable {
+    return [((DCACacheIncrementalStore*)self.cacheStack.persistentStore) objectsMatchingCacheable:cacheable];
+}
 @end
