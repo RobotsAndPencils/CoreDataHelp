@@ -44,7 +44,7 @@
 -(id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
     NSAssert(error,@"Must pass in an error.");
     NSAssert([request isKindOfClass:[NSFetchRequest class]],@"Only fetch requests currently supported.");
-    NSFetchRequest *fRequest = (NSFetchRequest*) request;
+    //NSFetchRequest *fRequest = (NSFetchRequest*) request; 
     id result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
     if (result) return [self portForeignObjects:result toContext:context];
     
