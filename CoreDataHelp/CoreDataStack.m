@@ -101,6 +101,10 @@
     if (stack->managedObjectModel.entities.count==0) {
         NSLog(@"Warning:  There are no entities in your model.  This means that the runtime environment cannot find your .xcdatamodeld file.  Check that it is added to the target, or if this is a unit test, check that you are compiling with DCA_UNITTEST enabled.");
     }
+    NSEntityDescription *sampleObject = stack->managedObjectModel.entities.lastObject;
+    
+    NSAssert([sampleObject.attributesByName objectForKey:INTERNAL_CACHING_KEY],@"For some reason, an object is not cacheable as expected: %@",sampleObject);
+    
     stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
     NSError *err = nil;
     [stack->persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&err];
@@ -160,20 +164,7 @@
     return [persistentStoreCoordinator.persistentStores objectAtIndex:0];
 }
 
-- (NSArray*) objectsMatchingCacheable:(NSManagedObject<DCACacheable>*) cacheable {
-    DCAFetchRequest *fetchRequest = [DCAFetchRequest fetchRequestWithEntityClass:[cacheable class]];
-    NSString *format = [NSString stringWithFormat:@"%@ == %%@",cacheable.uniqueIDKeyPath];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:format,cacheable.uniqueID];
-    fetchRequest.cachingPolicy = [DCACachingPolicy cachingPolicyWithBlock:^BOOL(NSDate *arbitraryDate) {
-        return YES;
-    }];
-    NSError *err = nil;
-    NSArray *arr = [self executeFetchRequest:fetchRequest err:&err];
-    if (!arr) {
-        NSLog(@"error: %@",err);
-    }
-    return arr;
-}
+
 
 - (id)executeFetchRequest:(id)fetchRequest err:(NSError *__autoreleasing *)err {
     NSAssert(err,@"Did not pass in an error object.");

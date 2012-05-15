@@ -19,7 +19,20 @@
     NSManagedObjectModel *defaultModel = [[NSManagedObjectModel defaultModel] copy];
     //hack in additional models
     NSArray *models = defaultModel.entities;
-    NSMutableArray *newModels = [NSMutableArray arrayWithArray:models];
+    
+    
+    NSMutableArray *newModels = [NSMutableArray array];
+    for (NSEntityDescription *model in models) {
+        NSEntityDescription *newModel = [[NSEntityDescription alloc] init];
+        newModel.name = model.name;
+        NSAttributeDescription *uniqueId = [[NSAttributeDescription alloc] init];
+        uniqueId.attributeType = NSStringAttributeType;
+        uniqueId.name = INTERNAL_CACHING_KEY;
+        NSMutableArray *newProperties = [NSMutableArray arrayWithArray:model.properties];
+        [newProperties addObject:uniqueId];
+        newModel.properties = newProperties;
+        [newModels addObject:newModel];
+    }
     NSEntityDescription *DCAFetchRequestModelDescription = [[NSEntityDescription alloc] init];
     DCAFetchRequestModelDescription.name = [DCAFetchRequestModel entityName];
     DCAFetchRequestModelDescription.managedObjectClassName = [DCAFetchRequestModel entityName];
