@@ -28,7 +28,10 @@
         NSAttributeDescription *uniqueId = [[NSAttributeDescription alloc] init];
         uniqueId.attributeType = NSStringAttributeType;
         uniqueId.name = INTERNAL_CACHING_KEY;
-        NSMutableArray *newProperties = [NSMutableArray arrayWithArray:model.properties];
+        NSMutableArray *newProperties = [NSMutableArray arrayWithCapacity:model.properties.count];
+        for (NSPropertyDescription *propertyDescription in model.properties) {
+            [newProperties addObject:[propertyDescription copy]];
+        }
         [newProperties addObject:uniqueId];
         newModel.properties = newProperties;
         [newModels addObject:newModel];
