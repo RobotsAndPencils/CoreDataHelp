@@ -107,7 +107,10 @@
 }
 
 - (NSArray*) objectsMatchingCacheable:(NSManagedObject<DCACacheable>*) cacheable {
+    //NSAssert([DCAFetchRequest fetchRequestWithEntityClass:[cacheable class]].entity,@"Can't get a fetch request for %@",NSStringFromClass([DCAFetchRequest class]));
+    
     DCAFetchRequest *fetchRequest = [DCAFetchRequest fetchRequestWithEntityClass:[cacheable class]];
+    
     NSString *format = [NSString stringWithFormat:@"%@ == %%@",INTERNAL_CACHING_KEY];
     fetchRequest.predicate = [NSPredicate predicateWithFormat:format,cacheable.uniqueID];
     fetchRequest.cachingPolicy = [DCACachingPolicy cachingPolicyWithBlock:^BOOL(NSDate *arbitraryDate) {
