@@ -12,4 +12,6 @@
 
 +(DCAFetchRequest*) dcaFetchRequest;
 +(NSString*) entityName;
+
++ (id) prototype;
 @end
