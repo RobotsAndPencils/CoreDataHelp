@@ -131,7 +131,7 @@
 
 - (NSManagedObjectContext*) currentMoc {
     if (dispatch_get_current_queue()==dispatch_get_main_queue()) return managedObjectContext;
-    else return privateManagedObjectContext;
+    else return [self poc];
 }
 
 - (void) backgroundOperation:(void (^)()) block {
@@ -172,7 +172,7 @@
 
 - (id)executeFetchRequest:(id)fetchRequest err:(NSError *__autoreleasing *)err {
     NSAssert(err,@"Did not pass in an error object.");
-    NSAssert(managedObjectContext,@"No moc?");
+    NSAssert([self currentMoc],@"No moc?");
     NSArray *results =  [[self currentMoc] executeFetchRequest:fetchRequest error:err];
     for (NSManagedObject *result in results) {
         NSAssert(result.managedObjectContext==[self currentMoc],@"Bad object returned while executing request %@, this will cause future errors",fetchRequest);
