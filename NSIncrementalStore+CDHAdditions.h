@@ -11,6 +11,6 @@
 @interface NSIncrementalStore (CDHAdditions)
 
 ///Wraps the foreign objects for inception-style serving as native objects of the current context.
--(NSArray*) portForeignObjects:(NSArray*) foreign toContext:(NSManagedObjectContext*) context;
+-(NSArray*) portForeignObjects:(NSArray*) foreign toContext:(NSManagedObjectContext*) context withInceptionStack:(CoreDataStack*) stack;
 - (NSIncrementalStoreNode *)inceptionNodeForObjectID:(NSManagedObjectID *)oid withInceptionStack:(CoreDataStack*) stack;
 @end

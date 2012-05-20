@@ -10,10 +10,15 @@
 #import "DCACacheable.h"
 #import "CoreDataStack.h"
 @implementation NSIncrementalStore (CDHAdditions)
--(NSArray*) portForeignObjects:(NSArray*) foreign toContext:(NSManagedObjectContext*) context{
+
+/*we're doing a bit of a cheat here.  Rather than collapse the objects down to an NSManagedObjectID and use that as the reference,
+ we're using an NSManagedObject* on the main thread as the reference.  This works because the main thread never goes out of scope.
+ We wouldn't normally do this, but this inceptionNode stuff has the biggest overhead in the whole library and this cuts out 90+% of it.*/
+
+-(NSArray*) portForeignObjects:(NSArray*) foreign toContext:(NSManagedObjectContext*) context withInceptionStack:(CoreDataStack*) stack{
     NSMutableArray *resultArr = [[NSMutableArray alloc] init];
     for(NSManagedObject<DCACacheable> *o in foreign) {
-        [resultArr addObject:[context objectWithID:[self newObjectIDForEntity:o.entity referenceObject:o.objectID]]];
+        [resultArr addObject:[context objectWithID:[self newObjectIDForEntity:o.entity referenceObject:[stack objectOnMainThread:o]]]];
     }
     return resultArr;
 
@@ -23,8 +28,8 @@
     NSManagedObjectID *cachedObjectID = [self referenceObjectForObjectID:oid];
     
     NSMutableDictionary *cachedValues = [[NSMutableDictionary alloc] init];
-    [stack beginRogueThread];
-        NSManagedObject *cachedObj = [stack objectOnCurrentThreadFromID:cachedObjectID];
+    //[stack beginRogueThread];
+    NSManagedObject *cachedObj = (NSManagedObject*) cachedObjectID;
         for (NSString *keyName in cachedObj.entity.attributesByName.allKeys) {
             if ([cachedObj valueForKey:keyName]) [cachedValues setObject:[cachedObj valueForKey:keyName] forKey:keyName];
         }

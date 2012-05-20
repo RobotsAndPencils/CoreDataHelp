@@ -102,7 +102,7 @@
         else arbitraryDate = [NSDate date]; 
 #warning that wasn't right at all //___INTELLIGENCE_DAMPENING_CORE_WHEATLEY
         if ([self effectivePolicy:fRequest].cachingPolicy(arbitraryDate)){
-            if (result) result = [self portForeignObjects:result toContext:context];
+            if (result) result = [self portForeignObjects:result toContext:context withInceptionStack:dataSource];
             if (result) ultimate_result = result;
             return;
         }
