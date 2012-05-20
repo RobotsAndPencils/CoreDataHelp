@@ -23,8 +23,16 @@
 - (void) delete:(NSManagedObject*)obj;
 
 //threading functions
+
 - (void) backgroundOperation:(void (^)()) block;
+- (void) backgroundOperationSync:(void (^)()) block;
 - (id) objectOnCurrentThread:(NSManagedObject*) o;
+- (id) objectOnMainThread:(NSManagedObject*) obj;
+- (NSArray*) objectsOnCurrentThread:(NSArray*) objects;
+- (NSArray*) objectsOnMainThread:(NSArray*) objects;
+- (id) objectOnCurrentThreadFromID:(NSManagedObjectID*) objectID;
+- (void) beginRogueThread;
+- (void) endRogueThread;
 
 //internal use only!!!!!
 - (NSPersistentStore*) persistentStore;

@@ -13,5 +13,5 @@
 /**This class is a custom store that caches in memory.*/
 @interface DCACacheIncrementalStore : NSIncrementalStore <NSIncrementalStoreAutoInstall>
 - (void) queryServed:(DCAFetchRequest*) fetchRequest;
-- (NSArray*) objectsMatchingCacheable:(NSManagedObject<DCACacheable>*) cacheable;
+- (BOOL) multipleObjectsMatchingCacheable:(NSManagedObject<DCACacheable>*) cacheable;
 @end

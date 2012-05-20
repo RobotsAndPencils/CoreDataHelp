@@ -14,12 +14,73 @@
 #import "DCAFetchRequestModel.h"
 #import "NSManagedObject+DCAAdditions.h"
 #import "DCACacheable.h"
+#import "NSThreadWrapper.h"
+//#define THREADING_DEBUG
+
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
-    NSManagedObjectContext *privateManagedObjectContext;
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     
+    NSMutableDictionary *managedObjectContexts;
+    //we store some NSNumbers in here that indicate whether an NSManagedObjectContext should be cleaned up or not
+    NSMutableDictionary *threadRetainCounts;
+    
+    dispatch_queue_t preferredQueue;
+    
+    
+    
+    
+    
+}
+
+
+-(void) mergeRequired:(NSNotification*) notification {
+        NSManagedObjectContext *sourceContext = [notification object];
+        //this method can receive changes from other stacks, and those changes must be ignored and not synchronized.
+        if (![[managedObjectContexts allValues] containsObject:sourceContext]) return; 
+    @synchronized(self) {
+
+        for (NSThreadWrapper *key  in [managedObjectContexts allKeys]) {
+            NSManagedObjectContext *context = [managedObjectContexts objectForKey:key];
+            if (context==sourceContext) continue;
+            if (context==managedObjectContext) {
+#ifdef THREADING_DEBUG
+                NSLog(@"Merging changes from %@ onto %@",sourceContext,context);
+#endif
+                if ([NSThread currentThread]==[NSThread mainThread]) {
+                    [managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+                }
+                else {
+                    dispatch_sync(dispatch_get_main_queue(), ^{
+                        [managedObjectContext mergeChangesFromContextDidSaveNotification:notification];
+                    });
+                }
+                continue;
+            }
+            NSLog(@"WARNING: cannot merge changes from %@ onto %@, your threads may be out of sync...",sourceContext,context);
+        }
+    }
+
+}
+
+
+
+-(void) installManagedObjectContexts {
+    
+    managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
+    managedObjectContexts = [NSMutableDictionary dictionaryWithObject:managedObjectContext forKey:[[NSThreadWrapper alloc] initWithNSThread:[NSThread mainThread]]];
+    threadRetainCounts = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithInt:1] forKey:[[NSThreadWrapper alloc] initWithNSThread:[NSThread mainThread]]];
+    preferredQueue = dispatch_queue_create("com.a.b", 0);
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeRequired:) name:NSManagedObjectContextDidSaveNotification object:nil];
+    
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    dispatch_release(preferredQueue);
 }
 
 + (CoreDataStack*) inMemoryStack {
@@ -32,8 +93,7 @@
     NSError *err = nil;
     NSPersistentStore *store = [stack->persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&err];
     NSAssert(store,@"No store seems to have been created, reason: %@",err);
-    stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [stack->managedObjectContext setPersistentStoreCoordinator:stack->persistentStoreCoordinator];
+    [stack installManagedObjectContexts];
     if (!stack->persistentStoreCoordinator) {
         NSLog(@"err %@",err);
         abort();
@@ -56,8 +116,7 @@
     NSURL *storeUrl = [NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:bundle_id]];
     NSPersistentStore *store = [stack->persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&err];
     NSAssert(store,@"No store seems to have been created, reason: %@",err);
-    stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [stack->managedObjectContext setPersistentStoreCoordinator:stack->persistentStoreCoordinator];
+    [stack installManagedObjectContexts];
     if (!stack->persistentStoreCoordinator) {
         NSLog(@"err %@",err);
         abort();
@@ -69,8 +128,7 @@
     CoreDataStack *stack = [[CoreDataStack alloc] init];
     stack->managedObjectModel = [NSManagedObjectModel defaultModel];
     stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
-    stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    stack->managedObjectContext.persistentStoreCoordinator = stack->persistentStoreCoordinator;
+    [stack installManagedObjectContexts];
     NSError *err = nil;
     [autoInstallableIncrementalStore performSelector:@selector(installInCoordinator:) withObject:stack->persistentStoreCoordinator];
 
@@ -85,8 +143,7 @@
     CoreDataStack *stack = [[CoreDataStack alloc] init];
     stack->managedObjectModel = [NSManagedObjectModel defaultModel];
     stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
-    stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    stack->managedObjectContext.persistentStoreCoordinator = stack->persistentStoreCoordinator;
+    [stack installManagedObjectContexts];
     NSError *err = nil;
 
     [DCACacheIncrementalStore installInCoordinator:stack->persistentStoreCoordinator];
@@ -113,8 +170,7 @@
     NSPersistentStore *store = [stack->persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&err];
     NSAssert(store,@"No store seems to have been created, reason: %@",err);
 
-    stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    [stack->managedObjectContext setPersistentStoreCoordinator:stack->persistentStoreCoordinator];
+    [stack installManagedObjectContexts];
     if (!stack->persistentStoreCoordinator) {
         NSLog(@"err %@",err);
         abort();
@@ -122,26 +178,87 @@
     return stack;
 }
 
-- (NSManagedObjectContext*) poc {
-    if (!privateManagedObjectContext) {
-        privateManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:(NSPrivateQueueConcurrencyType)];
-        privateManagedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
+- (void) beginRogueThread {
+    NSNumber *retainCount = [threadRetainCounts objectForKey:[NSThreadWrapper currentWrapper]];
+    if (retainCount) {
+        [threadRetainCounts setObject:[NSNumber numberWithInt:retainCount.intValue + 1] forKey:[NSThreadWrapper currentWrapper]];
+        return; //do not create new context!
     }
-    return privateManagedObjectContext;
+    [threadRetainCounts setObject:[NSNumber numberWithInt:1] forKey:[NSThreadWrapper currentWrapper]];
+    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    context.persistentStoreCoordinator = persistentStoreCoordinator;
+    [managedObjectContexts setObject:context forKey:[NSThreadWrapper currentWrapper]];
+#ifdef THREADING_DEBUG
+    NSLog(@"Beginning rogue thread %@ with moc %@ on stack %@",[NSThreadWrapper currentWrapper],context,self);
+#endif
+}
+- (void) endRogueThread {
+    NSError *err = nil;
+    if (![self save:&err]) {
+        NSLog(@"Unable to end a rogue thread.");
+        abort();
+    }
+    //can we remove the context?
+    NSNumber *retainCount = [threadRetainCounts objectForKey:[NSThreadWrapper currentWrapper]];
+    NSAssert(retainCount,@"Not sure why we don't have a retainCount for this thread, did it begin?");
+    if (retainCount.intValue > 1) {
+        [threadRetainCounts setObject:[NSNumber numberWithInt:retainCount.intValue - 1] forKey:[NSThreadWrapper currentWrapper]];
+        return; //do not clean up!
+    }
+    [threadRetainCounts removeObjectForKey:[NSThreadWrapper currentWrapper]];
+
+    NSManagedObjectContext *context = [managedObjectContexts objectForKey:[NSThreadWrapper currentWrapper]];
+    [context reset];
+    NSAssert(context,@"You seem to be ending a rogue thread that I am unaware of...");
+    [managedObjectContexts removeObjectForKey:[NSThreadWrapper currentWrapper]];
+#ifdef THREADING_DEBUG
+    NSLog(@"Ending rogue thread %@ with moc %@ on stack %@",[NSThreadWrapper currentWrapper],context,self);
+#endif
+
 }
 
 - (NSManagedObjectContext*) currentMoc {
-    if (dispatch_get_current_queue()==dispatch_get_main_queue()) return managedObjectContext;
-    else return [self poc];
+    NSManagedObjectContext *context = [managedObjectContexts objectForKey:[NSThreadWrapper currentWrapper]];
+    if (context) return context;
+    NSLog(@"You're trying to use the CoreDataStack %@ on a thread (%@) for which it is not authorized.  To fix this, use backgroundOperation[Sync] (recommended), or alternatively wrap your code with [coreDataStack beginRogueThread] and [coreDataStack endRogueThread]",self,[NSThreadWrapper currentWrapper]);
+    abort();
 }
 
 - (void) backgroundOperation:(void (^)()) block {
-    [[self poc] performBlock:block];
+    dispatch_async(preferredQueue, ^{
+        [[NSThread currentThread] setName:@"com.coreDataHelp.backgroundOperation"];
+        [self beginRogueThread];
+        block();
+        [self endRogueThread];
+    });
+}
+- (void) backgroundOperationSync:(void (^)()) block {
+    dispatch_sync(preferredQueue, ^{
+        [[NSThread currentThread] setName:@"com.coreDataHelp.backgroundOperationSync"];
+
+        [self beginRogueThread];
+        block();
+        [self endRogueThread];
+    });
+}
+- (NSArray*) objectsOnCurrentThread:(NSArray*) objects {
+    NSMutableArray *newThread = [NSMutableArray arrayWithCapacity:objects.count];
+    for(NSManagedObject *obj in objects) {
+        [newThread addObject:[self objectOnCurrentThread:obj]];
+    }
+    return [NSArray arrayWithArray:newThread];
+}
+- (NSArray*) objectsOnMainThread:(NSArray*) objects {
+    NSMutableArray *newThread = [NSMutableArray arrayWithCapacity:objects.count];
+    for(NSManagedObject *obj in objects) {
+        [newThread addObject:[self objectOnMainThread:obj]];
+    }
+    return [NSArray arrayWithArray:newThread];
 }
 
-- (id)objectOnCurrentThread:(NSManagedObject *)obj {
-    NSManagedObjectContext *correctContext = [self currentMoc];
-    if (obj.managedObjectContext ==correctContext) return obj;
+
+- (id) object:(NSManagedObject*) obj onContext:(NSManagedObjectContext*) correctContext {
+    if ([self currentMoc] ==correctContext) return obj;
     NSAssert(!obj.isInserted,@"(Not supported because Drew is lazy, file a bug, read the CD concurrency guide.)  The fix is trivial: just view the problem as a context-free poset whose elements are nonsingular bijections.");
     NSAssert(!obj.isUpdated,@"(Potentially dangerous operation, escalate to Drew to discuss, read the CD concurrency guide).  The fix is trivial: Just view the problem as a dihedral group whose relements are rgular residue classes.");
     NSAssert(!obj.isDeleted,@"(Potentially dangerous operation, escalate to Drew to discuss, read the CD concurrency guide.).  The fix is trivial: Just biject it to a continuous complexity class whose elements are structure-preserving semigroups.");
@@ -156,14 +273,27 @@
         abort();
     }
     return result;
-    
+}
+- (id)objectOnCurrentThread:(NSManagedObject *)obj {
+    return [self object:obj onContext:[self currentMoc]];
 }
 
+- (id) objectOnMainThread:(NSManagedObject*) obj {
+    return [self object:obj onContext:managedObjectContext];
+}
+
+- (id)objectOnCurrentThreadFromID:(NSManagedObjectID *)objectID {
+    return [[self currentMoc] objectWithID:objectID];
+}
+
+
+
 - (id)insertNewObjectOfClass:(Class)c {
-    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(c) inManagedObjectContext:managedObjectContext];
+    return [NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(c) inManagedObjectContext:[self currentMoc]];
 }
 - (void) delete:(NSManagedObject*)obj {
-    [managedObjectContext deleteObject:obj];
+    
+    [[self currentMoc] deleteObject:obj];
 }
 - (NSPersistentStore *)persistentStore {
     return [persistentStoreCoordinator.persistentStores objectAtIndex:0];
@@ -183,8 +313,13 @@
 
 }
 - (BOOL) save:(NSError *__autoreleasing*) error {
-    [[self poc] save:error];
-    return [managedObjectContext save:error];
+#ifdef THREADING_DEBUG
+    NSLog(@"Saving %@... %d inserts, %d updates, %d deletes",[self currentMoc],[self currentMoc].insertedObjects.count,[self currentMoc].updatedObjects.count,[self currentMoc].deletedObjects.count);
+#endif
+    if ([self currentMoc].hasChanges) {
+        return [[self currentMoc] save:error];
+    }
+    return YES;
 }
 
 - (void)queryServed:(NSFetchRequest *)fetchRequest {
