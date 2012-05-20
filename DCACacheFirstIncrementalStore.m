@@ -29,7 +29,28 @@
 
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options {
     if (self = [super initWithPersistentStoreCoordinator:root configurationName:name URL:url options:options]) {
-        cacheStack = [CoreDataStack cachingStack];
+        
+        //on iOS 5.0, we can get into an infinite loop if we try and install one coordinator while installing another coordinator.
+        //this was fixed in iOS 5.1
+        
+        //there are specific cases where version checking is warranted, and this is one of them.  Don't take this code as best practice.
+        //http://stackoverflow.com/questions/3339722/check-iphone-ios-version
+        
+        NSString *reqSysVer = @"5.1";
+        NSString *currSysVer = [UIDevice currentDevice].systemVersion;
+        if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
+            NSLog(@"Detected version %@ as bug-free.  If you see a hang around here, complain to Drew",currSysVer);
+            cacheStack = [CoreDataStack cachingStack];
+        }
+        else {
+            NSLog(@"Your OS is buggy.  Working around...");
+            dispatch_async(dispatch_queue_create(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                cacheStack = [CoreDataStack cachingStack];
+            });
+        }
+        
+        
+        
         defaultCachingPolicy = [DCACachingPolicy defaultCachingPolicy];
         
     }
