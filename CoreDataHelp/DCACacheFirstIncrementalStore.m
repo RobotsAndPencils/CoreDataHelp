@@ -69,7 +69,7 @@
     __block id result = nil;
     [cacheStack backgroundOperationSync:^{
         result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
-        if (result) result = [self portForeignObjects:result toContext:context];
+        if (result) result = [self portForeignObjects:result toContext:context withInceptionStack:cacheStack];
     }];
     if (result) return result;
     
@@ -85,7 +85,7 @@
         result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
         if (result) {
             *error = nil; //clear out any previous error, such as Cache too old
-            result =  [self portForeignObjects:result toContext:context];
+            result =  [self portForeignObjects:result toContext:context withInceptionStack:cacheStack];
         }
     }];
 
