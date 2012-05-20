@@ -88,6 +88,7 @@
     stack->managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     stack->managedObjectContext.persistentStoreCoordinator = stack->persistentStoreCoordinator;
     NSError *err = nil;
+
     [DCACacheIncrementalStore installInCoordinator:stack->persistentStoreCoordinator];
     if (!stack->persistentStoreCoordinator) {
         NSLog(@"err %@",err);
