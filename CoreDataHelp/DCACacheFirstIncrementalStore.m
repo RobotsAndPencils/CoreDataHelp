@@ -66,8 +66,12 @@
     NSAssert(error,@"Must pass in an error.");
     NSAssert([request isKindOfClass:[NSFetchRequest class]],@"Only fetch requests currently supported.");
     //NSFetchRequest *fRequest = (NSFetchRequest*) request; 
-    id result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
-    if (result) return [self portForeignObjects:result toContext:context];
+    __block id result = nil;
+    [cacheStack backgroundOperationSync:^{
+        result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
+        if (result) result = [self portForeignObjects:result toContext:context];
+    }];
+    if (result) return result;
     
     result = [self dcaExecuteRequest:request withContext:context error:error];
     if (![result isEqual:cacheIsCorrectNow]) {
@@ -75,21 +79,23 @@
         WORK_AROUND_RDAR_10732696(*error);
         return nil;
     }
-    if (![cacheStack save:error]) {
-        return nil;
-    }
-    [cacheStack queryServed:(NSFetchRequest*) request];
-    result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
-    if (result) {
-        *error = nil; //clear out any previous error, such as Cache too old
-        
-        return [self portForeignObjects:result toContext:context];
-    }
+    
+    [cacheStack backgroundOperationSync:^{
+        [cacheStack queryServed:(NSFetchRequest*) request];
+        result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
+        if (result) {
+            *error = nil; //clear out any previous error, such as Cache too old
+            result =  [self portForeignObjects:result toContext:context];
+        }
+    }];
+
+    if (result) return result;
+    
     return nil;
 }
 
 - (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
-    return [self inceptionNodeForObjectID:objectID];
+    return [self inceptionNodeForObjectID:objectID withInceptionStack:cacheStack];
     
 }
 
@@ -108,7 +114,7 @@
     abort();
 }
 
-- (NSArray *)objectsMatchingCacheable:(NSManagedObject<DCACacheable> *)cacheable {
-    return [((DCACacheIncrementalStore*)self.cacheStack.persistentStore) objectsMatchingCacheable:cacheable];
+- (BOOL)multipleObjectsMatchingCacheable:(NSManagedObject<DCACacheable> *)cacheable {
+    return [((DCACacheIncrementalStore*)self.cacheStack.persistentStore) multipleObjectsMatchingCacheable:cacheable];
 }
 @end

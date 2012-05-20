@@ -25,4 +25,11 @@
     return [[NSManagedObject alloc] initWithEntity:poorDescription insertIntoManagedObjectContext:nil];
 }
 
+- (void)assertThreading {
+    if (!self.managedObjectContext) {
+        NSLog(@"WARNING:  This is odd.  The object you're asserting is either being accessed in violation of the thread rules, or is a prototype.  We cannot tell which. %@",self);
+        
+    }
+}
+
 @end

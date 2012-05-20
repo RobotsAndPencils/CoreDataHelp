@@ -42,6 +42,8 @@
 		3A803D821520057B007D0B62 /* NSManagedObject+DCAAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D801520057B007D0B62 /* NSManagedObject+DCAAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D831520057B007D0B62 /* NSManagedObject+DCAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A803D811520057B007D0B62 /* NSManagedObject+DCAAdditions.m */; };
 		3A803D8415201D0E007D0B62 /* DCACacheFirstIncrementalStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D50151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3ACBFA391568C1A700CCD332 /* NSThreadWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACBFA371568C1A700CCD332 /* NSThreadWrapper.h */; };
+		3ACBFA3A1568C1A700CCD332 /* NSThreadWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBFA381568C1A700CCD332 /* NSThreadWrapper.m */; };
 		BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE38A4EF1521340A005AE1E8 /* CoreDataStack+Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */; };
 /* End PBXBuildFile section */
@@ -95,6 +97,8 @@
 		3A803D7D152004F1007D0B62 /* DCAFetchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAFetchRequest.m; sourceTree = "<group>"; };
 		3A803D801520057B007D0B62 /* NSManagedObject+DCAAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+DCAAdditions.h"; sourceTree = "<group>"; };
 		3A803D811520057B007D0B62 /* NSManagedObject+DCAAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+DCAAdditions.m"; sourceTree = "<group>"; };
+		3ACBFA371568C1A700CCD332 /* NSThreadWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSThreadWrapper.h; sourceTree = "<group>"; };
+		3ACBFA381568C1A700CCD332 /* NSThreadWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSThreadWrapper.m; sourceTree = "<group>"; };
 		BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CoreDataStack+Singleton.h"; sourceTree = "<group>"; };
 		BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CoreDataStack+Singleton.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +187,8 @@
 				BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */,
 				3A5C68191559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h */,
 				3A5C681A1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m */,
+				3ACBFA371568C1A700CCD332 /* NSThreadWrapper.h */,
+				3ACBFA381568C1A700CCD332 /* NSThreadWrapper.m */,
 			);
 			path = CoreDataHelp;
 			sourceTree = "<group>";
@@ -239,6 +245,7 @@
 				3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */,
 				BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */,
 				3A5C681B1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h in Headers */,
+				3ACBFA391568C1A700CCD332 /* NSThreadWrapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +358,7 @@
 				3A0545291520464B00FE961D /* DCAFetchRequestModel.m in Sources */,
 				BE38A4EF1521340A005AE1E8 /* CoreDataStack+Singleton.m in Sources */,
 				3A5C681C1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m in Sources */,
+				3ACBFA3A1568C1A700CCD332 /* NSThreadWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
