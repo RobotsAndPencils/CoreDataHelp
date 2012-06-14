@@ -9,6 +9,7 @@
 #import "DCAFetchRequest.h"
 
 @implementation DCAFetchRequest
+@synthesize cachingPolicy;
 + (DCAFetchRequest *)fetchRequestWithEntityName:(NSString *)entityName {
     return [[DCAFetchRequest alloc] initWithEntityName:entityName];
 }

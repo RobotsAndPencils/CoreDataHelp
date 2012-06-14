@@ -12,4 +12,7 @@
 
 +(DCAFetchRequest*) dcaFetchRequest;
 +(NSString*) entityName;
+
++ (id) prototype;
+-(void) assertThreading;
 @end

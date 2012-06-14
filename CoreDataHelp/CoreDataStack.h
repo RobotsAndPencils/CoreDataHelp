@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <CoreDataHelp/DCAFetchRequest.h>
+#import <CoreDataHelp/DCACacheable.h>
 
 @interface CoreDataStack : NSObject
 + (CoreDataStack*) inMemoryStack;
@@ -18,6 +19,20 @@
 - (id) executeFetchRequest:(NSFetchRequest*) fetchRequest err:(NSError * __autoreleasing *) err;
 - (id) insertNewObjectOfClass:(Class) c;
 - (BOOL) save:(NSError *__autoreleasing*) error;
+
+- (void) delete:(NSManagedObject*)obj;
+
+//threading functions
+
+- (void) backgroundOperation:(void (^)()) block;
+- (void) backgroundOperationSync:(void (^)()) block;
+- (id) objectOnCurrentThread:(NSManagedObject*) o;
+- (id) objectOnMainThread:(NSManagedObject*) obj;
+- (NSArray*) objectsOnCurrentThread:(NSArray*) objects;
+- (NSArray*) objectsOnMainThread:(NSArray*) objects;
+- (id) objectOnCurrentThreadFromID:(NSManagedObjectID*) objectID;
+- (void) beginRogueThread;
+- (void) endRogueThread;
 
 //internal use only!!!!!
 - (NSPersistentStore*) persistentStore;

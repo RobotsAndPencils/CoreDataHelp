@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define INTERNAL_CACHING_KEY @"INTERNAL_DCA_UNIQUEID_RESERVED_YOU_SHALL_NOT_PASS"
 /**Indicates that an object is cacheable.*/
 @protocol DCACacheable <NSObject>
 

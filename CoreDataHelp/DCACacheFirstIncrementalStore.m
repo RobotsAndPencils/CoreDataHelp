@@ -10,6 +10,7 @@
 #import "DCACacheIncrementalStore.h"
 #import "CoreDataStack.h"
 #import "CoreDataHelp.h"
+#import "NSIncrementalStore+CDHAdditions.h"
 @implementation DCACacheFirstIncrementalStore {
 
     
@@ -28,7 +29,28 @@
 
 - (id)initWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator *)root configurationName:(NSString *)name URL:(NSURL *)url options:(NSDictionary *)options {
     if (self = [super initWithPersistentStoreCoordinator:root configurationName:name URL:url options:options]) {
-        cacheStack = [CoreDataStack cachingStack];
+        
+        //on iOS 5.0, we can get into an infinite loop if we try and install one coordinator while installing another coordinator.
+        //this was fixed in iOS 5.1
+        
+        //there are specific cases where version checking is warranted, and this is one of them.  Don't take this code as best practice.
+        //http://stackoverflow.com/questions/3339722/check-iphone-ios-version
+        
+        NSString *reqSysVer = @"5.1";
+        NSString *currSysVer = [UIDevice currentDevice].systemVersion;
+        if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending) {
+            NSLog(@"Detected version %@ as bug-free.  If you see a hang around here, complain to Drew",currSysVer);
+            cacheStack = [CoreDataStack cachingStack];
+        }
+        else {
+            NSLog(@"Your OS is buggy.  Working around...");
+            dispatch_async(dispatch_queue_create(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                cacheStack = [CoreDataStack cachingStack];
+            });
+        }
+        
+        
+        
         defaultCachingPolicy = [DCACachingPolicy defaultCachingPolicy];
         
     }
@@ -43,7 +65,12 @@
 -(id)executeRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
     NSAssert(error,@"Must pass in an error.");
     NSAssert([request isKindOfClass:[NSFetchRequest class]],@"Only fetch requests currently supported.");
-    id result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
+    //NSFetchRequest *fRequest = (NSFetchRequest*) request; 
+    __block id result = nil;
+    [cacheStack backgroundOperationSync:^{
+        result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
+        if (result) result = [self portForeignObjects:result toContext:context withInceptionStack:cacheStack];
+    }];
     if (result) return result;
     
     result = [self dcaExecuteRequest:request withContext:context error:error];
@@ -52,16 +79,24 @@
         WORK_AROUND_RDAR_10732696(*error);
         return nil;
     }
-    if (![cacheStack save:error]) {
-        return nil;
-    }
-    [cacheStack queryServed:(NSFetchRequest*) request];
-    result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
-    if (result) {
-        *error = nil; //clear out any previous error, such as Cache too old
-        return result;
-    }
+    
+    [cacheStack backgroundOperationSync:^{
+        [cacheStack queryServed:(NSFetchRequest*) request];
+        result = [cacheStack executeFetchRequest:(NSFetchRequest*) request err:error];
+        if (result) {
+            *error = nil; //clear out any previous error, such as Cache too old
+            result =  [self portForeignObjects:result toContext:context withInceptionStack:cacheStack];
+        }
+    }];
+
+    if (result) return result;
+    
     return nil;
+}
+
+- (NSIncrementalStoreNode *)newValuesForObjectWithID:(NSManagedObjectID *)objectID withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
+    return [self inceptionNodeForObjectID:objectID withInceptionStack:cacheStack];
+    
 }
 
 + (NSPersistentStore *)installInCoordinator:(NSPersistentStoreCoordinator *)coordinator {
@@ -77,5 +112,9 @@
 - (id)dcaExecuteRequest:(NSPersistentStoreRequest *)request withContext:(NSManagedObjectContext *)context error:(NSError *__autoreleasing *)error {
     NSLog(@"Not implemented in this abstract class.");
     abort();
+}
+
+- (BOOL)multipleObjectsMatchingCacheable:(NSManagedObject<DCACacheable> *)cacheable {
+    return [((DCACacheIncrementalStore*)self.cacheStack.persistentStore) multipleObjectsMatchingCacheable:cacheable];
 }
 @end
