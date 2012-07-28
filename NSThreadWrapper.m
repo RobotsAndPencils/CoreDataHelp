@@ -27,7 +27,7 @@
     return self;
 }
 - (NSString *)description {
-    return [NSString stringWithFormat:@"ThreadWrapper wrapping %x",thread];
+    return [NSString stringWithFormat:@"ThreadWrapper wrapping %@",thread];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
