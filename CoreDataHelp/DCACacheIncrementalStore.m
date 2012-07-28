@@ -78,7 +78,7 @@
     if ([request isKindOfClass:[NSSaveChangesRequest class]]) {
         return [self executeSaveRequest:(NSSaveChangesRequest*) request withContext:context error:error];
     }
-    NSFetchRequest *fRequest = [dataSource portFetchRequest:(DCAFetchRequest*) request];
+    DCAFetchRequest *fRequest = [dataSource portFetchRequest:(DCAFetchRequest*) request];
     NSFetchRequest *inceptionRequest = [DCAFetchRequest fetchRequestWithEntityClass:[DCAFetchRequestModel class]];
     inceptionRequest.predicate = [NSPredicate predicateWithFormat:@"fetchRequest == %@",fRequest];
     
