@@ -15,6 +15,8 @@
 + (CoreDataStack*) inMemoryStack;
 + (CoreDataStack*) onDiskStack;
 + (CoreDataStack*) incrementalStoreStack:(Class) autoInstallableIncrementalStore;
++ (CoreDataStack*) incrementalStoreStackWithClass:(Class) nsIncrementalStoreClass model:(NSManagedObjectModel*) model configuration:(NSURL*) configuration url:(NSURL*) url options:(NSDictionary*) options caching:(BOOL) caching;
+
 
 - (id) executeFetchRequest:(NSFetchRequest*) fetchRequest err:(NSError * __autoreleasing *) err;
 - (id) insertNewObjectOfClass:(Class) c;
