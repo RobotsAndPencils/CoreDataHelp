@@ -22,7 +22,7 @@
 		3A34EC5314DC980700C7CAC6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC5214DC980700C7CAC6 /* CoreData.framework */; };
 		3A35F66315201FC8004AEBA8 /* CoreDataHelpError.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66115201FC8004AEBA8 /* CoreDataHelpError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A35F66415201FC8004AEBA8 /* CoreDataHelpError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35F66215201FC8004AEBA8 /* CoreDataHelpError.m */; };
-		3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66615202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h */; };
+		3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66615202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A35F66915202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35F66715202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m */; };
 		3A5C681B1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A5C68191559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h */; };
 		3A5C681C1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C681A1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m */; };
@@ -240,8 +240,8 @@
 				3A803D7E152004F1007D0B62 /* DCAFetchRequest.h in Headers */,
 				3A803D821520057B007D0B62 /* NSManagedObject+DCAAdditions.h in Headers */,
 				3A803D8415201D0E007D0B62 /* DCACacheFirstIncrementalStore.h in Headers */,
-				3A35F66315201FC8004AEBA8 /* CoreDataHelpError.h in Headers */,
 				3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */,
+				3A35F66315201FC8004AEBA8 /* CoreDataHelpError.h in Headers */,
 				3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */,
 				BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */,
 				3A5C681B1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h in Headers */,

@@ -141,6 +141,24 @@
     return stack;
 }
 
++ (CoreDataStack*) incrementalStoreStackWithClass:(Class) nsIncrementalStoreClass model:(NSManagedObjectModel*) model configuration:(NSString*) configuration url:(NSURL*) url options:(NSDictionary*) options caching:(BOOL) caching{
+    CoreDataStack *stack = [[CoreDataStack alloc] init];
+    stack->managedObjectModel = model;
+    stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
+
+    [stack installManagedObjectContexts];
+    NSError *err = nil;
+    [NSPersistentStoreCoordinator registerStoreClass:nsIncrementalStoreClass forStoreType:NSStringFromClass(nsIncrementalStoreClass)];
+    [stack->persistentStoreCoordinator addPersistentStoreWithType:NSStringFromClass(nsIncrementalStoreClass) configuration:configuration URL:url options:options error:&err];
+    
+    if (stack->persistentStoreCoordinator.persistentStores.count==0) {
+        NSLog(@"Error: %@",err);
+        abort();
+    }
+    return stack;
+    
+}
+
 + (CoreDataStack*) cachingStack {
     CoreDataStack *stack = [[CoreDataStack alloc] init];
     stack->managedObjectModel = [NSManagedObjectModel defaultModel];

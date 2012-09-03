@@ -11,4 +11,5 @@
 @interface NSManagedObjectModel (CDHAdditions)
 + (NSManagedObjectModel*) defaultModel;
 +(NSManagedObjectModel*) cachingModel;
++ (NSManagedObjectModel*) modelWithFilenameOmitExtension:(NSString*) fileName inBundle:(NSBundle*) bundle;
 @end
