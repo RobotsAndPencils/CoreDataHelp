@@ -11,7 +11,6 @@
 		3A0545291520464B00FE961D /* DCAFetchRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0545271520464B00FE961D /* DCAFetchRequestModel.m */; };
 		3A34EC1C14DC975000C7CAC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC1B14DC975000C7CAC6 /* Foundation.framework */; };
 		3A34EC2214DC975000C7CAC6 /* CoreDataHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34EC2114DC975000C7CAC6 /* CoreDataHelp.m */; };
-		3A34EC2A14DC975000C7CAC6 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC2914DC975000C7CAC6 /* SenTestingKit.framework */; };
 		3A34EC2C14DC975000C7CAC6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC2B14DC975000C7CAC6 /* UIKit.framework */; };
 		3A34EC2D14DC975000C7CAC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC1B14DC975000C7CAC6 /* Foundation.framework */; };
 		3A34EC3014DC975000C7CAC6 /* libCoreDataHelp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC1814DC975000C7CAC6 /* libCoreDataHelp.a */; };
@@ -44,6 +43,7 @@
 		3A803D8415201D0E007D0B62 /* DCACacheFirstIncrementalStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D50151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ACBFA391568C1A700CCD332 /* NSThreadWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACBFA371568C1A700CCD332 /* NSThreadWrapper.h */; };
 		3ACBFA3A1568C1A700CCD332 /* NSThreadWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBFA381568C1A700CCD332 /* NSThreadWrapper.m */; };
+		BE28D4EF15F553A5005CB3FA /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC2914DC975000C7CAC6 /* SenTestingKit.framework */; };
 		BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE38A4EF1521340A005AE1E8 /* CoreDataStack+Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */; };
 /* End PBXBuildFile section */
@@ -116,8 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE28D4EF15F553A5005CB3FA /* SenTestingKit.framework in Frameworks */,
 				3A34EC5314DC980700C7CAC6 /* CoreData.framework in Frameworks */,
-				3A34EC2A14DC975000C7CAC6 /* SenTestingKit.framework in Frameworks */,
 				3A34EC2C14DC975000C7CAC6 /* UIKit.framework in Frameworks */,
 				3A34EC2D14DC975000C7CAC6 /* Foundation.framework in Frameworks */,
 				3A34EC3014DC975000C7CAC6 /* libCoreDataHelp.a in Frameworks */,
@@ -407,7 +407,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "$(PRODUCT_NAME)";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -431,18 +431,21 @@
 		22353C4F14E3422E00B82B81 /* UnitTest */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/libCoreDataHelp.a";
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DCA_RELEASE;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelpTests/CoreDataHelpTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = UnitTest;
@@ -467,7 +470,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "$(PRODUCT_NAME)";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -486,7 +489,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INSTALL_PATH = "$(PRODUCT_NAME)";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -525,18 +528,21 @@
 		3A34EC4014DC975000C7CAC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/libCoreDataHelp.a";
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DCA_DEBUG;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelpTests/CoreDataHelpTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -544,18 +550,21 @@
 		3A34EC4114DC975000C7CAC6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/libCoreDataHelp.a";
 				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = DCA_RELEASE;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "CoreDataHelpTests/CoreDataHelpTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
