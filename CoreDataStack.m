@@ -80,7 +80,9 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+#ifndef __IPHONE_6_0
     dispatch_release(preferredQueue);
+#endif
 }
 
 + (CoreDataStack*) inMemoryStack {
