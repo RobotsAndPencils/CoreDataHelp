@@ -17,6 +17,10 @@
 #import "NSThreadWrapper.h"
 //#define THREADING_DEBUG
 
+@protocol DontCoupleWithCaffeineProtocol
+- (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
+@end
+
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
@@ -276,6 +280,10 @@
     return [NSArray arrayWithArray:newThread];
 }
 
+- (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult {
+    id<DontCoupleWithCaffeineProtocol> caffeinableContext = (id<DontCoupleWithCaffeineProtocol>) [self currentMoc];
+    return [caffeinableContext arrayWithOpaqueResult:opaqueResult];
+}
 
 - (id) object:(NSManagedObject*) obj onContext:(NSManagedObjectContext*) correctContext {
     if ([self currentMoc] ==correctContext) return obj;

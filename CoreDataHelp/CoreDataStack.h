@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import <CoreDataHelp/DCAFetchRequest.h>
 #import <CoreDataHelp/DCACacheable.h>
+@class CaffeineOpaqueResult;
 
 @interface CoreDataStack : NSObject
 + (CoreDataStack*) inMemoryStack;
@@ -35,7 +36,7 @@
 - (id) objectOnCurrentThreadFromID:(NSManagedObjectID*) objectID;
 - (void) beginRogueThread;
 - (void) endRogueThread;
-
+- (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
 //internal use only!!!!!
 - (NSPersistentStore*) persistentStore;
 + (CoreDataStack*) cachingStack;
