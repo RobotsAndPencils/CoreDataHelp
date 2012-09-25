@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A0545261520464B00FE961D /* DCAFetchRequestModel.h */; };
 		3A0545291520464B00FE961D /* DCAFetchRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0545271520464B00FE961D /* DCAFetchRequestModel.m */; };
+		3A30BA7F16126874008F3265 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A30BA7D16126874008F3265 /* Model.xcdatamodeld */; };
 		3A34EC1C14DC975000C7CAC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC1B14DC975000C7CAC6 /* Foundation.framework */; };
 		3A34EC2214DC975000C7CAC6 /* CoreDataHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34EC2114DC975000C7CAC6 /* CoreDataHelp.m */; };
 		3A34EC2C14DC975000C7CAC6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC2B14DC975000C7CAC6 /* UIKit.framework */; };
@@ -18,7 +19,6 @@
 		3A34EC3914DC975000C7CAC6 /* CoreDataHelpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34EC3814DC975000C7CAC6 /* CoreDataHelpTests.m */; };
 		3A34EC4714DC978300C7CAC6 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34EC4514DC978300C7CAC6 /* Entity.h */; };
 		3A34EC4A14DC978F00C7CAC6 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34EC4614DC978300C7CAC6 /* Entity.m */; };
-		3A34EC5014DC97EA00C7CAC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A34EC4E14DC97EA00C7CAC6 /* Model.xcdatamodeld */; };
 		3A34EC5314DC980700C7CAC6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC5214DC980700C7CAC6 /* CoreData.framework */; };
 		3A35F66315201FC8004AEBA8 /* CoreDataHelpError.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66115201FC8004AEBA8 /* CoreDataHelpError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A35F66415201FC8004AEBA8 /* CoreDataHelpError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35F66215201FC8004AEBA8 /* CoreDataHelpError.m */; };
@@ -61,6 +61,7 @@
 /* Begin PBXFileReference section */
 		3A0545261520464B00FE961D /* DCAFetchRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAFetchRequestModel.h; sourceTree = "<group>"; };
 		3A0545271520464B00FE961D /* DCAFetchRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAFetchRequestModel.m; sourceTree = "<group>"; };
+		3A30BA7E16126874008F3265 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3A34EC1814DC975000C7CAC6 /* libCoreDataHelp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreDataHelp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A34EC1B14DC975000C7CAC6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3A34EC1F14DC975000C7CAC6 /* CoreDataHelp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreDataHelp-Prefix.pch"; sourceTree = "<group>"; };
@@ -75,7 +76,6 @@
 		3A34EC3814DC975000C7CAC6 /* CoreDataHelpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelpTests.m; sourceTree = "<group>"; };
 		3A34EC4514DC978300C7CAC6 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = ../CoreDataHelp/Entity.h; sourceTree = "<group>"; };
 		3A34EC4614DC978300C7CAC6 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Entity.m; path = ../CoreDataHelp/Entity.m; sourceTree = "<group>"; };
-		3A34EC4F14DC97EA00C7CAC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3A34EC5214DC980700C7CAC6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		3A35F66115201FC8004AEBA8 /* CoreDataHelpError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataHelpError.h; sourceTree = "<group>"; };
 		3A35F66215201FC8004AEBA8 /* CoreDataHelpError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataHelpError.m; sourceTree = "<group>"; };
@@ -208,7 +208,7 @@
 				3A34EC4614DC978300C7CAC6 /* Entity.m */,
 				3A34EC3714DC975000C7CAC6 /* CoreDataHelpTests.h */,
 				3A34EC3814DC975000C7CAC6 /* CoreDataHelpTests.m */,
-				3A34EC4E14DC97EA00C7CAC6 /* Model.xcdatamodeld */,
+				3A30BA7D16126874008F3265 /* Model.xcdatamodeld */,
 				3A34EC3214DC975000C7CAC6 /* Supporting Files */,
 			);
 			path = CoreDataHelpTests;
@@ -368,7 +368,7 @@
 			files = (
 				3A34EC3914DC975000C7CAC6 /* CoreDataHelpTests.m in Sources */,
 				3A34EC4A14DC978F00C7CAC6 /* Entity.m in Sources */,
-				3A34EC5014DC97EA00C7CAC6 /* Model.xcdatamodeld in Sources */,
+				3A30BA7F16126874008F3265 /* Model.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,14 +605,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		3A34EC4E14DC97EA00C7CAC6 /* Model.xcdatamodeld */ = {
+		3A30BA7D16126874008F3265 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				3A34EC4F14DC97EA00C7CAC6 /* Model.xcdatamodel */,
+				3A30BA7E16126874008F3265 /* Model.xcdatamodel */,
 			);
-			currentVersion = 3A34EC4F14DC97EA00C7CAC6 /* Model.xcdatamodel */;
+			currentVersion = 3A30BA7E16126874008F3265 /* Model.xcdatamodel */;
 			name = Model.xcdatamodeld;
-			path = ../CoreDataHelp/Model.xcdatamodeld;
+			path = "../../caffeine-ios/caffeine-ios/caffeine-iosTests/Model.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
