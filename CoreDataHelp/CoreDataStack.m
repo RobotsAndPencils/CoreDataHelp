@@ -20,7 +20,6 @@
 @protocol DontCoupleWithCaffeineProtocol
 - (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
 @end
-
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
