@@ -17,10 +17,6 @@
 #import "NSThreadWrapper.h"
 //#define THREADING_DEBUG
 
-@protocol DontCoupleWithCaffeineProtocol
-- (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
-@end
-
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
@@ -84,9 +80,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-#ifndef __IPHONE_6_0
     dispatch_release(preferredQueue);
-#endif
 }
 
 + (CoreDataStack*) inMemoryStack {
@@ -143,24 +137,6 @@
         abort();
     }
     return stack;
-}
-
-+ (CoreDataStack*) incrementalStoreStackWithClass:(Class) nsIncrementalStoreClass model:(NSManagedObjectModel*) model configuration:(NSString*) configuration url:(NSURL*) url options:(NSDictionary*) options caching:(BOOL) caching{
-    CoreDataStack *stack = [[CoreDataStack alloc] init];
-    stack->managedObjectModel = model;
-    stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
-
-    [stack installManagedObjectContexts];
-    NSError *err = nil;
-    [NSPersistentStoreCoordinator registerStoreClass:nsIncrementalStoreClass forStoreType:NSStringFromClass(nsIncrementalStoreClass)];
-    [stack->persistentStoreCoordinator addPersistentStoreWithType:NSStringFromClass(nsIncrementalStoreClass) configuration:configuration URL:url options:options error:&err];
-    
-    if (stack->persistentStoreCoordinator.persistentStores.count==0) {
-        NSLog(@"Error: %@",err);
-        abort();
-    }
-    return stack;
-    
 }
 
 + (CoreDataStack*) cachingStack {
@@ -280,10 +256,6 @@
     return [NSArray arrayWithArray:newThread];
 }
 
-- (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult {
-    id<DontCoupleWithCaffeineProtocol> caffeinableContext = (id<DontCoupleWithCaffeineProtocol>) [self currentMoc];
-    return [caffeinableContext arrayWithOpaqueResult:opaqueResult];
-}
 
 - (id) object:(NSManagedObject*) obj onContext:(NSManagedObjectContext*) correctContext {
     if ([self currentMoc] ==correctContext) return obj;

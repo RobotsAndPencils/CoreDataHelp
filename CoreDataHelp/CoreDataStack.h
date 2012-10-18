@@ -10,14 +10,11 @@
 #import <CoreData/CoreData.h>
 #import <CoreDataHelp/DCAFetchRequest.h>
 #import <CoreDataHelp/DCACacheable.h>
-@class CaffeineOpaqueResult;
 
 @interface CoreDataStack : NSObject
 + (CoreDataStack*) inMemoryStack;
 + (CoreDataStack*) onDiskStack;
 + (CoreDataStack*) incrementalStoreStack:(Class) autoInstallableIncrementalStore;
-+ (CoreDataStack*) incrementalStoreStackWithClass:(Class) nsIncrementalStoreClass model:(NSManagedObjectModel*) model configuration:(NSURL*) configuration url:(NSURL*) url options:(NSDictionary*) options caching:(BOOL) caching;
-
 
 - (id) executeFetchRequest:(NSFetchRequest*) fetchRequest err:(NSError * __autoreleasing *) err;
 - (id) insertNewObjectOfClass:(Class) c;
@@ -36,7 +33,7 @@
 - (id) objectOnCurrentThreadFromID:(NSManagedObjectID*) objectID;
 - (void) beginRogueThread;
 - (void) endRogueThread;
-- (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
+
 //internal use only!!!!!
 - (NSPersistentStore*) persistentStore;
 + (CoreDataStack*) cachingStack;
