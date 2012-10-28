@@ -22,11 +22,12 @@
 #endif
 //#define THREADING_DEBUG
 
-@protocol DontCoupleWithCaffeineProtocol
 #ifdef CAFFEINE_IOS_IS_AVAILABLE
+@protocol DontCoupleWithCaffeineProtocol
 - (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
-#endif
 @end
+#endif
+
 
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;
@@ -286,11 +287,12 @@
     }
     return [NSArray arrayWithArray:newThread];
 }
-
+#ifdef CAFFEINE_IOS_IS_AVAILABLE
 - (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult {
     id<DontCoupleWithCaffeineProtocol> caffeinableContext = (id<DontCoupleWithCaffeineProtocol>) [self currentMoc];
     return [caffeinableContext arrayWithOpaqueResult:opaqueResult];
 }
+#endif
 
 - (id) object:(NSManagedObject*) obj onContext:(NSManagedObjectContext*) correctContext {
     if ([self currentMoc] ==correctContext) return obj;
