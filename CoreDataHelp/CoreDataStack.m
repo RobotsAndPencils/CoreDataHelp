@@ -71,7 +71,7 @@
 
 -(void) installManagedObjectContexts {
     
-    managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSConfinementConcurrencyType];
+    managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     managedObjectContext.persistentStoreCoordinator = persistentStoreCoordinator;
     managedObjectContexts = [NSMutableDictionary dictionaryWithObject:managedObjectContext forKey:[[NSThreadWrapper alloc] initWithNSThread:[NSThread mainThread]]];
     threadRetainCounts = [NSMutableDictionary dictionaryWithObject:[NSNumber numberWithInt:1] forKey:[[NSThreadWrapper alloc] initWithNSThread:[NSThread mainThread]]];
