@@ -415,7 +415,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /usr/bin/python;
-			shellScript = "import os, os.path\nprint \"Configuring\",os.environ[\"PRODUCT_NAME\"]\nsearch_path = os.path.join(os.environ[\"BUILT_PRODUCTS_DIR\"],\"include\")\ndirectories = [ name for name in os.listdir(search_path) if os.path.isdir(os.path.join(search_path, name)) ]\n\navailable_h = \"//configured at build time\\n\"\nfor directory in directories:\n    print directory,\"is available\"\n    available_h += \"#define \"+directory.upper()+\"_IS_AVAILABLE\\n\"\n\nwith open(os.path.join(search_path,\"available.h\"),\"w\") as availableFile:\n    availableFile.write(available_h)\n\n";
+			shellScript = "import os, os.path, re\nprint \"Configuring\",os.environ[\"PRODUCT_NAME\"]\nsearch_path = os.path.join(os.environ[\"BUILT_PRODUCTS_DIR\"],\"include\")\ndirectories = [ name for name in os.listdir(search_path) if os.path.isdir(os.path.join(search_path, name)) ]\n\navailable_h = \"//configured at build time\\n\"\nfor directory in directories:\n    directory = directory.upper()\n    directory = re.sub(r'[^A-Z]+', '_',directory)\n    print directory,\"is available\"\n    available_h += \"#define \"+directory.upper()+\"_IS_AVAILABLE\\n\"\n\nwith open(os.path.join(search_path,\"available.h\"),\"w\") as availableFile:\n    availableFile.write(available_h)\n\n";
 		};
 		3A34EC2614DC975000C7CAC6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

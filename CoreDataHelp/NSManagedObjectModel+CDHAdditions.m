@@ -47,4 +47,12 @@
     defaultModel.entities = newModels;
     return defaultModel;
 }
+
++ (NSManagedObjectModel *)modelWithFilenameOmitExtension:(NSString *)fileName inBundle:(NSBundle *)bundle {
+    NSString *path = [bundle pathForResource:fileName ofType:@"momd"];
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath:path];
+    NSManagedObjectModel *model = [[NSManagedObjectModel alloc] initWithContentsOfURL:fileURL];
+    NSAssert(model,@"Could not load model from path %@",fileURL);
+    return model;
+}
 @end

@@ -16,6 +16,7 @@
 #import <CoreDataHelp/DCACacheable.h>
 #import <CoreDataHelp/CoreDataStack+Singleton.h>
 #import <CoreDataHelp/NSManagedObject+DCAAdditions.h>
+#import <CoreDataHelp/NSManagedObjectModel+CDHAdditions.h>
 
 void objc_retain(id x);
 #define WORK_AROUND_RDAR_10732696(X) objc_retain(X)

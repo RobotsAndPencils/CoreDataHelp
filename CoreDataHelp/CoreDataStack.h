@@ -10,17 +10,27 @@
 #import <CoreData/CoreData.h>
 #import <CoreDataHelp/DCAFetchRequest.h>
 #import <CoreDataHelp/DCACacheable.h>
+#import <available.h>
+#ifdef CAFFEINE_IOS_IS_AVAILABLE
+#import <caffeine-ios/caffeine_ios.h>
+#endif
 
 @interface CoreDataStack : NSObject
 + (CoreDataStack*) inMemoryStack;
 + (CoreDataStack*) onDiskStack;
 + (CoreDataStack*) incrementalStoreStack:(Class) autoInstallableIncrementalStore;
++ (CoreDataStack*) incrementalStoreStackWithClass:(Class) nsIncrementalStoreClass model:(NSManagedObjectModel*) model configuration:(NSString*) configuration url:(NSURL*) url options:(NSDictionary*) options caching:(BOOL) caching;
 
 - (id) executeFetchRequest:(NSFetchRequest*) fetchRequest err:(NSError * __autoreleasing *) err;
 - (id) insertNewObjectOfClass:(Class) c;
 - (BOOL) save:(NSError *__autoreleasing*) error;
 
 - (void) delete:(NSManagedObject*)obj;
+
+#ifdef CAFFEINE_IOS_IS_AVAILABLE
+- (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
+#endif
+
 
 //threading functions
 

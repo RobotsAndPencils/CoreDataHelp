@@ -15,14 +15,19 @@
 #import "NSManagedObject+DCAAdditions.h"
 #import "DCACacheable.h"
 #import "NSThreadWrapper.h"
+
 #import <available.h>
+#ifdef CAFFEINE_IOS_IS_AVAILABLE
+#import <caffeine-ios/caffeine_ios.h>
+#endif
 //#define THREADING_DEBUG
 
 @protocol DontCoupleWithCaffeineProtocol
-#ifdef CAFFEINE_IS_AVAILABLE
+#ifdef CAFFEINE_IOS_IS_AVAILABLE
 - (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
 #endif
 @end
+
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;
@@ -42,11 +47,11 @@
 
 
 -(void) mergeRequired:(NSNotification*) notification {
-        NSManagedObjectContext *sourceContext = [notification object];
-        //this method can receive changes from other stacks, and those changes must be ignored and not synchronized.
-        if (![[managedObjectContexts allValues] containsObject:sourceContext]) return; 
+    NSManagedObjectContext *sourceContext = [notification object];
+    //this method can receive changes from other stacks, and those changes must be ignored and not synchronized.
+    if (![[managedObjectContexts allValues] containsObject:sourceContext]) return;
     @synchronized(self) {
-
+        
         for (NSThreadWrapper *key  in [managedObjectContexts allKeys]) {
             NSManagedObjectContext *context = [managedObjectContexts objectForKey:key];
             if (context==sourceContext) continue;
@@ -67,7 +72,7 @@
             NSLog(@"WARNING: cannot merge changes from %@ onto %@, your threads may be out of sync...",sourceContext,context);
         }
     }
-
+    
 }
 
 
@@ -86,7 +91,9 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+#ifndef __IPHONE_6_0
     dispatch_release(preferredQueue);
+#endif
 }
 
 + (CoreDataStack*) inMemoryStack {
@@ -108,7 +115,7 @@
 }
 
 + (CoreDataStack*) onDiskStack {
-#ifdef DCA_UNITTEST 
+#ifdef DCA_UNITTEST
     return [CoreDataStack inMemoryStack];
 #endif
     CoreDataStack *stack = [[CoreDataStack alloc] init];
@@ -137,12 +144,30 @@
     [stack installManagedObjectContexts];
     NSError *err = nil;
     [autoInstallableIncrementalStore performSelector:@selector(installInCoordinator:) withObject:stack->persistentStoreCoordinator];
-
+    
     if (!stack->persistentStoreCoordinator) {
         NSLog(@"err %@",err);
         abort();
     }
     return stack;
+}
+
++ (CoreDataStack*) incrementalStoreStackWithClass:(Class) nsIncrementalStoreClass model:(NSManagedObjectModel*) model configuration:(NSString*) configuration url:(NSURL*) url options:(NSDictionary*) options caching:(BOOL) caching{
+    CoreDataStack *stack = [[CoreDataStack alloc] init];
+    stack->managedObjectModel = model;
+    stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
+    
+    [stack installManagedObjectContexts];
+    NSError *err = nil;
+    [NSPersistentStoreCoordinator registerStoreClass:nsIncrementalStoreClass forStoreType:NSStringFromClass(nsIncrementalStoreClass)];
+    [stack->persistentStoreCoordinator addPersistentStoreWithType:NSStringFromClass(nsIncrementalStoreClass) configuration:configuration URL:url options:options error:&err];
+    
+    if (stack->persistentStoreCoordinator.persistentStores.count==0) {
+        NSLog(@"Error: %@",err);
+        abort();
+    }
+    return stack;
+    
 }
 
 + (CoreDataStack*) cachingStack {
@@ -151,14 +176,14 @@
     stack->persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:stack->managedObjectModel];
     [stack installManagedObjectContexts];
     NSError *err = nil;
-
+    
     [DCACacheIncrementalStore installInCoordinator:stack->persistentStoreCoordinator];
     if (!stack->persistentStoreCoordinator) {
         NSLog(@"err %@",err);
         abort();
     }
     return stack;
-
+    
 }
 
 + (CoreDataStack*) inMemoryStack_caching {
@@ -175,7 +200,7 @@
     NSError *err = nil;
     NSPersistentStore *store = [stack->persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType configuration:nil URL:nil options:nil error:&err];
     NSAssert(store,@"No store seems to have been created, reason: %@",err);
-
+    
     [stack installManagedObjectContexts];
     if (!stack->persistentStoreCoordinator) {
         NSLog(@"err %@",err);
@@ -212,7 +237,7 @@
         return; //do not clean up!
     }
     [threadRetainCounts removeObjectForKey:[NSThreadWrapper currentWrapper]];
-
+    
     NSManagedObjectContext *context = [managedObjectContexts objectForKey:[NSThreadWrapper currentWrapper]];
     [context reset];
     NSAssert(context,@"You seem to be ending a rogue thread that I am unaware of...");
@@ -220,7 +245,7 @@
 #ifdef THREADING_DEBUG
     NSLog(@"Ending rogue thread %@ with moc %@ on stack %@",[NSThreadWrapper currentWrapper],context,self);
 #endif
-
+    
 }
 
 - (NSManagedObjectContext*) currentMoc {
@@ -241,7 +266,7 @@
 - (void) backgroundOperationSync:(void (^)()) block {
     dispatch_sync(preferredQueue, ^{
         [[NSThread currentThread] setName:@"com.coreDataHelp.backgroundOperationSync"];
-
+        
         [self beginRogueThread];
         block();
         [self endRogueThread];
@@ -262,6 +287,10 @@
     return [NSArray arrayWithArray:newThread];
 }
 
+- (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult {
+    id<DontCoupleWithCaffeineProtocol> caffeinableContext = (id<DontCoupleWithCaffeineProtocol>) [self currentMoc];
+    return [caffeinableContext arrayWithOpaqueResult:opaqueResult];
+}
 
 - (id) object:(NSManagedObject*) obj onContext:(NSManagedObjectContext*) correctContext {
     if ([self currentMoc] ==correctContext) return obj;
@@ -316,7 +345,7 @@
         
     }
     return results;
-
+    
 }
 - (BOOL) save:(NSError *__autoreleasing*) error {
 #ifdef THREADING_DEBUG
