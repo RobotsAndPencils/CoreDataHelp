@@ -9,6 +9,24 @@
 /* Begin PBXBuildFile section */
 		3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A0545261520464B00FE961D /* DCAFetchRequestModel.h */; };
 		3A0545291520464B00FE961D /* DCAFetchRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0545271520464B00FE961D /* DCAFetchRequestModel.m */; };
+		3A0663A0163D1C77001377B6 /* NSThreadWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBFA381568C1A700CCD332 /* NSThreadWrapper.m */; };
+		3A0663A2163D1C77001377B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC1B14DC975000C7CAC6 /* Foundation.framework */; };
+		3A0663A4163D1C77001377B6 /* CoreDataHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34EC2014DC975000C7CAC6 /* CoreDataHelp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663A5163D1C77001377B6 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34EC4514DC978300C7CAC6 /* Entity.h */; };
+		3A0663A6163D1C77001377B6 /* DCACacheable.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D5C151FD36F007D0B62 /* DCACacheable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663A7163D1C77001377B6 /* DCACachingPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D6B151FF04E007D0B62 /* DCACachingPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663A8163D1C77001377B6 /* DCACacheIncrementalStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D72151FF821007D0B62 /* DCACacheIncrementalStore.h */; };
+		3A0663A9163D1C77001377B6 /* NSIncrementalStoreAutoInstall.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D76151FF95B007D0B62 /* NSIncrementalStoreAutoInstall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663AA163D1C77001377B6 /* CoreDataStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D78151FF97F007D0B62 /* CoreDataStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663AB163D1C77001377B6 /* DCAFetchRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D7C152004F1007D0B62 /* DCAFetchRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663AC163D1C77001377B6 /* NSManagedObject+DCAAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D801520057B007D0B62 /* NSManagedObject+DCAAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663AD163D1C77001377B6 /* DCACacheFirstIncrementalStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D50151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663AE163D1C77001377B6 /* NSManagedObjectModel+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66615202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663AF163D1C77001377B6 /* CoreDataHelpError.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66115201FC8004AEBA8 /* CoreDataHelpError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663B0163D1C77001377B6 /* DCAFetchRequestModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A0545261520464B00FE961D /* DCAFetchRequestModel.h */; };
+		3A0663B1163D1C77001377B6 /* CoreDataStack+Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3A0663B2163D1C77001377B6 /* NSIncrementalStore+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A5C68191559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h */; };
+		3A0663B3163D1C77001377B6 /* NSThreadWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACBFA371568C1A700CCD332 /* NSThreadWrapper.h */; };
 		3A30BA7F16126874008F3265 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A30BA7D16126874008F3265 /* Model.xcdatamodeld */; };
 		3A34EC1C14DC975000C7CAC6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC1B14DC975000C7CAC6 /* Foundation.framework */; };
 		3A34EC2214DC975000C7CAC6 /* CoreDataHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34EC2114DC975000C7CAC6 /* CoreDataHelp.m */; };
@@ -49,6 +67,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		3A0663BC163D1CCE001377B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A34EC0F14DC975000C7CAC6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3A066392163D1C77001377B6;
+			remoteInfo = CoreDataHelpHeaders;
+		};
 		3A34EC2E14DC975000C7CAC6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3A34EC0F14DC975000C7CAC6 /* Project object */;
@@ -61,6 +86,7 @@
 /* Begin PBXFileReference section */
 		3A0545261520464B00FE961D /* DCAFetchRequestModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAFetchRequestModel.h; sourceTree = "<group>"; };
 		3A0545271520464B00FE961D /* DCAFetchRequestModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAFetchRequestModel.m; sourceTree = "<group>"; };
+		3A0663B8163D1C77001377B6 /* libCoreDataHelpHeaders.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreDataHelpHeaders.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A30BA7E16126874008F3265 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		3A34EC1814DC975000C7CAC6 /* libCoreDataHelp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreDataHelp.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A34EC1B14DC975000C7CAC6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -104,6 +130,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3A0663A1163D1C77001377B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A0663A2163D1C77001377B6 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A34EC1514DC975000C7CAC6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -143,6 +177,7 @@
 			children = (
 				3A34EC1814DC975000C7CAC6 /* libCoreDataHelp.a */,
 				3A34EC2814DC975000C7CAC6 /* CoreDataHelpTests.octest */,
+				3A0663B8163D1C77001377B6 /* libCoreDataHelpHeaders.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -226,6 +261,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3A0663A3163D1C77001377B6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A0663A4163D1C77001377B6 /* CoreDataHelp.h in Headers */,
+				3A0663A5163D1C77001377B6 /* Entity.h in Headers */,
+				3A0663A6163D1C77001377B6 /* DCACacheable.h in Headers */,
+				3A0663A7163D1C77001377B6 /* DCACachingPolicy.h in Headers */,
+				3A0663A8163D1C77001377B6 /* DCACacheIncrementalStore.h in Headers */,
+				3A0663A9163D1C77001377B6 /* NSIncrementalStoreAutoInstall.h in Headers */,
+				3A0663AA163D1C77001377B6 /* CoreDataStack.h in Headers */,
+				3A0663AB163D1C77001377B6 /* DCAFetchRequest.h in Headers */,
+				3A0663AC163D1C77001377B6 /* NSManagedObject+DCAAdditions.h in Headers */,
+				3A0663AD163D1C77001377B6 /* DCACacheFirstIncrementalStore.h in Headers */,
+				3A0663AE163D1C77001377B6 /* NSManagedObjectModel+CDHAdditions.h in Headers */,
+				3A0663AF163D1C77001377B6 /* CoreDataHelpError.h in Headers */,
+				3A0663B0163D1C77001377B6 /* DCAFetchRequestModel.h in Headers */,
+				3A0663B1163D1C77001377B6 /* CoreDataStack+Singleton.h in Headers */,
+				3A0663B2163D1C77001377B6 /* NSIncrementalStore+CDHAdditions.h in Headers */,
+				3A0663B3163D1C77001377B6 /* NSThreadWrapper.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A34EC1614DC975000C7CAC6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -252,6 +310,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3A066392163D1C77001377B6 /* CoreDataHelpHeaders */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A0663B4163D1C77001377B6 /* Build configuration list for PBXNativeTarget "CoreDataHelpHeaders" */;
+			buildPhases = (
+				3A066393163D1C77001377B6 /* Sources */,
+				3A0663A1163D1C77001377B6 /* Frameworks */,
+				3A0663A3163D1C77001377B6 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreDataHelpHeaders;
+			productName = CoreDataHelp;
+			productReference = 3A0663B8163D1C77001377B6 /* libCoreDataHelpHeaders.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		3A34EC1714DC975000C7CAC6 /* CoreDataHelp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A34EC3C14DC975000C7CAC6 /* Build configuration list for PBXNativeTarget "CoreDataHelp" */;
@@ -263,6 +338,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3A0663BD163D1CCE001377B6 /* PBXTargetDependency */,
 			);
 			name = CoreDataHelp;
 			productName = CoreDataHelp;
@@ -310,6 +386,7 @@
 			targets = (
 				3A34EC1714DC975000C7CAC6 /* CoreDataHelp */,
 				3A34EC2714DC975000C7CAC6 /* CoreDataHelpTests */,
+				3A066392163D1C77001377B6 /* CoreDataHelpHeaders */,
 			);
 		};
 /* End PBXProject section */
@@ -342,6 +419,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3A066393163D1C77001377B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A0663A0163D1C77001377B6 /* NSThreadWrapper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3A34EC1414DC975000C7CAC6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -375,6 +460,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		3A0663BD163D1CCE001377B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3A066392163D1C77001377B6 /* CoreDataHelpHeaders */;
+			targetProxy = 3A0663BC163D1CCE001377B6 /* PBXContainerItemProxy */;
+		};
 		3A34EC2F14DC975000C7CAC6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3A34EC1714DC975000C7CAC6 /* CoreDataHelp */;
@@ -447,6 +537,51 @@
 				SKIP_INSTALL = YES;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = octest;
+			};
+			name = UnitTest;
+		};
+		3A0663B5163D1C77001377B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/CoreDataHelp.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_DEBUG;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = CoreDataHelpHeaders;
+				PUBLIC_HEADERS_FOLDER_PATH = include/CoreDataHelp;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3A0663B6163D1C77001377B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/CoreDataHelp.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_RELEASE;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = CoreDataHelpHeaders;
+				PUBLIC_HEADERS_FOLDER_PATH = include/CoreDataHelp;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		3A0663B7163D1C77001377B6 /* UnitTest */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/CoreDataHelp.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreDataHelp/CoreDataHelp-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = DCA_UNITTEST;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = CoreDataHelpHeaders;
+				PUBLIC_HEADERS_FOLDER_PATH = include/CoreDataHelp;
+				SKIP_INSTALL = YES;
 			};
 			name = UnitTest;
 		};
@@ -572,6 +707,16 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3A0663B4163D1C77001377B6 /* Build configuration list for PBXNativeTarget "CoreDataHelpHeaders" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A0663B5163D1C77001377B6 /* Debug */,
+				3A0663B6163D1C77001377B6 /* Release */,
+				3A0663B7163D1C77001377B6 /* UnitTest */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3A34EC1214DC975000C7CAC6 /* Build configuration list for PBXProject "CoreDataHelp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
