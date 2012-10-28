@@ -15,10 +15,13 @@
 #import "NSManagedObject+DCAAdditions.h"
 #import "DCACacheable.h"
 #import "NSThreadWrapper.h"
+#import <available.h>
 //#define THREADING_DEBUG
 
 @protocol DontCoupleWithCaffeineProtocol
+#ifdef CAFFEINE_IS_AVAILABLE
 - (NSArray*) arrayWithOpaqueResult:(CaffeineOpaqueResult*) opaqueResult;
+#endif
 @end
 @implementation CoreDataStack {
     NSManagedObjectModel *managedObjectModel;

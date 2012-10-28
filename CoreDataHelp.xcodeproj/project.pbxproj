@@ -331,6 +331,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A34EC3C14DC975000C7CAC6 /* Build configuration list for PBXNativeTarget "CoreDataHelp" */;
 			buildPhases = (
+				3A0663D7163D2160001377B6 /* ShellScript */,
 				3A34EC1414DC975000C7CAC6 /* Sources */,
 				3A34EC1514DC975000C7CAC6 /* Frameworks */,
 				3A34EC1614DC975000C7CAC6 /* Headers */,
@@ -403,6 +404,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3A0663D7163D2160001377B6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /usr/bin/python;
+			shellScript = "import os, os.path\nprint \"Configuring\",os.environ[\"PRODUCT_NAME\"]\nsearch_path = os.path.join(os.environ[\"BUILT_PRODUCTS_DIR\"],\"include\")\ndirectories = [ name for name in os.listdir(search_path) if os.path.isdir(os.path.join(search_path, name)) ]\n\navailable_h = \"//configured at build time\\n\"\nfor directory in directories:\n    print directory,\"is available\"\n    available_h += \"#define \"+directory.upper()+\"_IS_AVAILABLE\\n\"\n\nwith open(os.path.join(search_path,\"available.h\"),\"w\") as availableFile:\n    availableFile.write(available_h)\n\n";
+		};
 		3A34EC2614DC975000C7CAC6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
