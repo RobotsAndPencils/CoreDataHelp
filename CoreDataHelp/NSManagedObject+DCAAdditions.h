@@ -15,4 +15,8 @@
 
 + (id) prototype;
 -(void) assertThreading;
+
+/**Turns the object into a fault.
+ @param areYouPositivethereAreNoChanges - we can perform certain optimizations if you can guarantee that neither attributes nor relationships (including inverses of other relationships) have changed. */
+-(void) fault:(BOOL) areYouPositiveThereAreNoChanges;
 @end

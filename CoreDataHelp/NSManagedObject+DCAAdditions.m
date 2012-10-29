@@ -17,6 +17,10 @@
     return NSStringFromClass([self class]);
 }
 
+- (void)fault:(BOOL)areYouPositiveThereAreNoChanges {
+    [self.managedObjectContext refreshObject:self mergeChanges:!areYouPositiveThereAreNoChanges];
+}
+
 
 + (id)prototype {
     NSEntityDescription *poorDescription = [[[NSManagedObjectModel defaultModel] entitiesByName] objectForKey:NSStringFromClass([self class])];
