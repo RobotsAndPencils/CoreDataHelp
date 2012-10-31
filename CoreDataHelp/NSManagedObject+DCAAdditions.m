@@ -18,7 +18,9 @@
 }
 
 - (void)fault:(BOOL)areYouPositiveThereAreNoChanges {
+    assert(areYouPositiveThereAreNoChanges);
     [self.managedObjectContext refreshObject:self mergeChanges:!areYouPositiveThereAreNoChanges];
+    NSAssert(self.isFault, @"Didn't turn into fault?");
 }
 
 
