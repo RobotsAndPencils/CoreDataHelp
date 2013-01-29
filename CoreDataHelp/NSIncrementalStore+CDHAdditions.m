@@ -21,6 +21,7 @@
         NSManagedObject *objectOnMainThread = [stack objectOnMainThread:o];
         NSEntityDescription *entity = self.persistentStoreCoordinator.managedObjectModel.entitiesByName[objectOnMainThread.entity.name];
         NSManagedObject *object = [context objectWithID:[self newObjectIDForEntity:entity referenceObject:objectOnMainThread]];
+        [resultArr addObject:object];
     }
     return resultArr;
 
