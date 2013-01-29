@@ -18,7 +18,9 @@
 -(NSArray*) portForeignObjects:(NSArray*) foreign toContext:(NSManagedObjectContext*) context withInceptionStack:(CoreDataStack*) stack{
     NSMutableArray *resultArr = [[NSMutableArray alloc] init];
     for(NSManagedObject<DCACacheable> *o in foreign) {
-        [resultArr addObject:[context objectWithID:[self newObjectIDForEntity:o.entity referenceObject:[stack objectOnMainThread:o]]]];
+        NSManagedObject *objectOnMainThread = [stack objectOnMainThread:o];
+        NSEntityDescription *entity = self.persistentStoreCoordinator.managedObjectModel.entitiesByName[objectOnMainThread.entity.name];
+        NSManagedObject *object = [context objectWithID:[self newObjectIDForEntity:entity referenceObject:objectOnMainThread]];
     }
     return resultArr;
 
