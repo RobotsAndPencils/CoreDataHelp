@@ -16,7 +16,6 @@
 #import "DCACacheable.h"
 #import "NSThreadWrapper.h"
 
-#import <available.h>
 #ifdef CAFFEINE_IOS_IS_AVAILABLE
 #import <caffeine-ios/caffeine_ios.h>
 #endif

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A0545261520464B00FE961D /* DCAFetchRequestModel.h */; };
+		3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A0545261520464B00FE961D /* DCAFetchRequestModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A0545291520464B00FE961D /* DCAFetchRequestModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0545271520464B00FE961D /* DCAFetchRequestModel.m */; };
 		3A0663A0163D1C77001377B6 /* NSThreadWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBFA381568C1A700CCD332 /* NSThreadWrapper.m */; };
 		3A0663A2163D1C77001377B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC1B14DC975000C7CAC6 /* Foundation.framework */; };
@@ -36,21 +36,21 @@
 		3A34EC3014DC975000C7CAC6 /* libCoreDataHelp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC1814DC975000C7CAC6 /* libCoreDataHelp.a */; };
 		3A34EC3614DC975000C7CAC6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3A34EC3414DC975000C7CAC6 /* InfoPlist.strings */; };
 		3A34EC3914DC975000C7CAC6 /* CoreDataHelpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34EC3814DC975000C7CAC6 /* CoreDataHelpTests.m */; };
-		3A34EC4714DC978300C7CAC6 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34EC4514DC978300C7CAC6 /* Entity.h */; };
+		3A34EC4714DC978300C7CAC6 /* Entity.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34EC4514DC978300C7CAC6 /* Entity.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A34EC4A14DC978F00C7CAC6 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A34EC4614DC978300C7CAC6 /* Entity.m */; };
 		3A34EC5314DC980700C7CAC6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A34EC5214DC980700C7CAC6 /* CoreData.framework */; };
 		3A35F66315201FC8004AEBA8 /* CoreDataHelpError.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66115201FC8004AEBA8 /* CoreDataHelpError.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A35F66415201FC8004AEBA8 /* CoreDataHelpError.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35F66215201FC8004AEBA8 /* CoreDataHelpError.m */; };
-		3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66615202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h */; };
+		3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A35F66615202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A35F66915202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A35F66715202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.m */; };
-		3A5C681B1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A5C68191559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h */; };
+		3A5C681B1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A5C68191559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A5C681C1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A5C681A1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.m */; };
 		3A803D53151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A803D51151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.m */; };
 		3A803D5D151FD36F007D0B62 /* DCACacheable.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D5C151FD36F007D0B62 /* DCACacheable.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D65151FD71F007D0B62 /* CoreDataHelp.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A34EC2014DC975000C7CAC6 /* CoreDataHelp.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D6D151FF04E007D0B62 /* DCACachingPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D6B151FF04E007D0B62 /* DCACachingPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D6E151FF04E007D0B62 /* DCACachingPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A803D6C151FF04E007D0B62 /* DCACachingPolicy.m */; };
-		3A803D74151FF821007D0B62 /* DCACacheIncrementalStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D72151FF821007D0B62 /* DCACacheIncrementalStore.h */; };
+		3A803D74151FF821007D0B62 /* DCACacheIncrementalStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D72151FF821007D0B62 /* DCACacheIncrementalStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D75151FF821007D0B62 /* DCACacheIncrementalStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A803D73151FF821007D0B62 /* DCACacheIncrementalStore.m */; };
 		3A803D77151FF95B007D0B62 /* NSIncrementalStoreAutoInstall.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D76151FF95B007D0B62 /* NSIncrementalStoreAutoInstall.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D7A151FF97F007D0B62 /* CoreDataStack.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D78151FF97F007D0B62 /* CoreDataStack.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -60,7 +60,7 @@
 		3A803D821520057B007D0B62 /* NSManagedObject+DCAAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D801520057B007D0B62 /* NSManagedObject+DCAAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3A803D831520057B007D0B62 /* NSManagedObject+DCAAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A803D811520057B007D0B62 /* NSManagedObject+DCAAdditions.m */; };
 		3A803D8415201D0E007D0B62 /* DCACacheFirstIncrementalStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A803D50151FC7A3007D0B62 /* DCACacheFirstIncrementalStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ACBFA391568C1A700CCD332 /* NSThreadWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACBFA371568C1A700CCD332 /* NSThreadWrapper.h */; };
+		3ACBFA391568C1A700CCD332 /* NSThreadWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3ACBFA371568C1A700CCD332 /* NSThreadWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3ACBFA3A1568C1A700CCD332 /* NSThreadWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 3ACBFA381568C1A700CCD332 /* NSThreadWrapper.m */; };
 		BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */ = {isa = PBXBuildFile; fileRef = BE38A4EC1521340A005AE1E8 /* CoreDataStack+Singleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BE38A4EF1521340A005AE1E8 /* CoreDataStack+Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = BE38A4ED1521340A005AE1E8 /* CoreDataStack+Singleton.m */; };
@@ -289,19 +289,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A803D65151FD71F007D0B62 /* CoreDataHelp.h in Headers */,
-				3A34EC4714DC978300C7CAC6 /* Entity.h in Headers */,
 				3A803D5D151FD36F007D0B62 /* DCACacheable.h in Headers */,
 				3A803D6D151FF04E007D0B62 /* DCACachingPolicy.h in Headers */,
-				3A803D74151FF821007D0B62 /* DCACacheIncrementalStore.h in Headers */,
 				3A803D77151FF95B007D0B62 /* NSIncrementalStoreAutoInstall.h in Headers */,
 				3A803D7A151FF97F007D0B62 /* CoreDataStack.h in Headers */,
 				3A803D7E152004F1007D0B62 /* DCAFetchRequest.h in Headers */,
 				3A803D821520057B007D0B62 /* NSManagedObject+DCAAdditions.h in Headers */,
 				3A803D8415201D0E007D0B62 /* DCACacheFirstIncrementalStore.h in Headers */,
 				3A35F66315201FC8004AEBA8 /* CoreDataHelpError.h in Headers */,
+				BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */,
+				3A34EC4714DC978300C7CAC6 /* Entity.h in Headers */,
+				3A803D74151FF821007D0B62 /* DCACacheIncrementalStore.h in Headers */,
 				3A35F66815202705004AEBA8 /* NSManagedObjectModel+CDHAdditions.h in Headers */,
 				3A0545281520464B00FE961D /* DCAFetchRequestModel.h in Headers */,
-				BE38A4EE1521340A005AE1E8 /* CoreDataStack+Singleton.h in Headers */,
 				3A5C681B1559B0AD000C1AAB /* NSIncrementalStore+CDHAdditions.h in Headers */,
 				3ACBFA391568C1A700CCD332 /* NSThreadWrapper.h in Headers */,
 			);
@@ -331,7 +331,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A34EC3C14DC975000C7CAC6 /* Build configuration list for PBXNativeTarget "CoreDataHelp" */;
 			buildPhases = (
-				3A0663D7163D2160001377B6 /* ShellScript */,
 				3A34EC1414DC975000C7CAC6 /* Sources */,
 				3A34EC1514DC975000C7CAC6 /* Frameworks */,
 				3A34EC1614DC975000C7CAC6 /* Headers */,
@@ -404,19 +403,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3A0663D7163D2160001377B6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /usr/bin/python;
-			shellScript = "import os, os.path, re\nprint \"Configuring\",os.environ[\"PRODUCT_NAME\"]\nsearch_path = os.path.join(os.environ[\"BUILT_PRODUCTS_DIR\"],\"include\")\ndirectories = [ name for name in os.listdir(search_path) if os.path.isdir(os.path.join(search_path, name)) ]\n\navailable_h = \"//configured at build time\\n\"\nfor directory in directories:\n    directory = directory.upper()\n    directory = re.sub(r'[^A-Z]+', '_',directory)\n    print directory,\"is available\"\n    available_h += \"#define \"+directory.upper()+\"_IS_AVAILABLE\\n\"\n\nwith open(os.path.join(search_path,\"available.h\"),\"w\") as availableFile:\n    availableFile.write(available_h)\n\n";
-		};
 		3A34EC2614DC975000C7CAC6 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
